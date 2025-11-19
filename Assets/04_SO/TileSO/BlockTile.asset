@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e68de0e70140847bd6f355232dca12, type: 3}
   m_Name: BlockTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 250f24a1ceb45754cbc51d2dfb3bad03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9dd1a21a91858f246ac0c99521460e9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
