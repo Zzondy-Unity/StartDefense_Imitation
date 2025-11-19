@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e68de0e70140847bd6f355232dca12, type: 3}
   m_Name: MonsterSpawnTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 9b7eb4bedcb6634449e4250260dcfefd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88d675a1132146e45b8cb867417d2460, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -35,5 +35,3 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   tileType: 0
-  cellPos: {x: 0, y: 0, z: 0}
-  worldPos: {x: 0, y: 0, z: 0}
