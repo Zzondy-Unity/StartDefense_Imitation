@@ -1,16 +1,52 @@
-﻿/// <summary>
-/// 게임의 진행 총괄을 맡는 매니저입니다.
-/// 게임 시작기믹만을 추가하였습니다.
+using UnityEngine;
+
+/// <summary>
+/// 매니저 총괄 클래스이며 싱글톤입니다.
 /// </summary>
-public class GameManager : IManager
+public class GameManager : SingletonDontDestroy<GameManager>
 {
-    public void Init()
+    private SceneController _sceneController;
+    
+    private ResourceManager _resourceManager;
+    private SoundManager _soundManager;
+    
+    public static ResourceManager Resource { get { return Instance._resourceManager; } }
+    public static SoundManager Sound { get { return Instance._soundManager; } }
+    public static SceneController Scene { get { return Instance._sceneController; } }
+
+    protected override void Awake()
     {
-        GameStart();
+        base.Awake();
+        
+        InitializeManagers();
+    }
+    
+    /// <summary>
+    /// 매니저를 생성 및 초기화합니다.
+    /// MonoBehaviour인 매니저는 CreateManager를하고 순서에 맞게 초기화합니다.
+    /// </summary>
+    private void InitializeManagers()
+    {
+        _resourceManager = new ResourceManager();
+        _soundManager = CreateManager<SoundManager>(Instance.transform);
+        _sceneController = CreateManager<SceneController>(Instance.transform);
+
+        _resourceManager.Init();
+        _soundManager.Init();
+
+        
     }
 
-    private void GameStart()
+    private T CreateManager<T>(Transform parent) where T : Component, IManager
     {
+        T manager = GetComponentInChildren<T>(parent);
+        if (manager == null)
+        {
+            GameObject obj = new GameObject(typeof(T).Name);
+            manager = obj.AddComponent<T>();
+            obj.transform.SetParent(parent);
+        }
         
+        return manager;
     }
 }

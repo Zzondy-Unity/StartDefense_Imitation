@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour, IManager
     private List<AudioSource> sfxPool = new List<AudioSource>();
 
     private const string AUDIO_PATH = "Audio/";
-    private const string MIXER_PATH = "Mixer";
+    private const string MIXER_PATH = "Mixer/MasterMixer";
     private const string BGM_PATH = "BGM";
     private const string SFX_PATH = "SFX";
     

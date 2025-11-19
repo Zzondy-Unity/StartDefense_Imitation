@@ -18,3 +18,10 @@ public enum SFX
 {
     
 }
+
+public enum SceneName
+{
+    StartScene,
+    LobbyScene,
+    GameScene,
+}

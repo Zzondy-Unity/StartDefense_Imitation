@@ -2,20 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileManager : MonoBehaviour, IManager
+public class TileManager
 {
     private Tilemap tilemap;
     private Dictionary<Vector3Int, TileNode> tiles = new Dictionary<Vector3Int, TileNode>();
-    private TypedTile monsterSpawnTile;
-    private TypedTile monsterGoalTile;
+    private TileNode monsterSpawnTile;
+    private TileNode monsterGoalTile;
     
-    public void Init()
+    public TileManager(Tilemap tilemap)
     {
-        tilemap = FindObjectOfType<Tilemap>();
-        if (tilemap == null)
-        {
-            // 어떻게 해야하지..?
-        }
+        this.tilemap = tilemap;
+        this.tilemap.CompressBounds();   // 사용된 셀만 감싸도록 bounds를 축소하는 함수
         
         InitializeTileDic();
     }
@@ -44,6 +41,14 @@ public class TileManager : MonoBehaviour, IManager
                 else if (baseTile is TypedTile typed)
                 {
                     node.tileType = typed.tileType;
+                    if (typed.tileType == TileType.Goal)
+                    {
+                        monsterGoalTile = node;
+                    }
+                    else if (typed.tileType == TileType.Spawn)
+                    {
+                        monsterSpawnTile = node;
+                    }
                 }
                 
                 Vector3 tileWorldPos = tilemap.GetCellCenterWorld(cellPos);
@@ -51,10 +56,35 @@ public class TileManager : MonoBehaviour, IManager
                     
                 tiles.Add(node.cellPos, node);
 
-                Logger.Log($"CellPosition {cellPos} is {node.tileType}" +
-                           $"\n WorldPos is {node.worldPos})");
-                var test = Managers.Resource.LoadAsset<Sprite>("TestCircle");
-                Instantiate(test, node.worldPos, Quaternion.identity);
+                // Logger.Log($"CellPosition {cellPos} is {node.tileType}" +
+                //            $"\n WorldPos is {node.worldPos})");
+                // var test = Managers.Resource.LoadAsset<GameObject>("Circle");
+                // var sr = test.GetComponent<SpriteRenderer>();
+                // switch (node.tileType)
+                // {
+                //     case TileType.Road:
+                //         sr.color = Color.white;
+                //         break;
+                //     case TileType.Spawn:
+                //         sr.color = Color.black;
+                //         break;
+                //     case TileType.Goal:
+                //         sr.color = Color.blue;
+                //         break;
+                //     case TileType.Block:
+                //         sr.color = Color.red;
+                //         break;
+                //     case TileType.Normal:
+                //         sr.color = Color.yellow;
+                //         break;
+                //     case TileType.Wall:
+                //         sr.color = Color.green;
+                //         break;
+                //     case TileType.FixTile:
+                //         sr.color = Color.magenta;
+                //         break;
+                // }
+                // Instantiate(test, node.worldPos, Quaternion.identity);
             }
         }
     }
