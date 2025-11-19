@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileNode : MonoBehaviour
+[System.Serializable]
+public class TileNode
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public TileType tileType;
+    public Vector3Int cellPos;
+    public Vector3 worldPos;
 }
