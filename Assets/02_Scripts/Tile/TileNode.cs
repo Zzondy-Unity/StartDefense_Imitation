@@ -8,4 +8,6 @@ public class TileNode
     public TileType tileType;
     public Vector3Int cellPos;
     public Vector3 worldPos;
+
+    public TileNode parent;
 }

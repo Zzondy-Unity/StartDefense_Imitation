@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 public class TileManager
 {
@@ -8,6 +8,15 @@ public class TileManager
     private Dictionary<Vector3Int, TileNode> tiles = new Dictionary<Vector3Int, TileNode>();
     private TileNode monsterSpawnTile;
     private TileNode monsterGoalTile;
+    private Stack<Vector3> monsterPath = new Stack<Vector3>();
+
+    private readonly Vector3Int[] neighborOffset =
+    {
+        new Vector3Int(1, 0, 0),
+        new Vector3Int(-1, 0, 0),
+        new Vector3Int(0, 1, 0),
+        new Vector3Int(0, -1, 0),
+    };
     
     public TileManager(Tilemap tilemap)
     {
@@ -15,6 +24,17 @@ public class TileManager
         this.tilemap.CompressBounds();   // 사용된 셀만 감싸도록 bounds를 축소하는 함수
         
         InitializeTileDic();
+        GetMonsterWayPoints();
+    }
+
+    public Stack<Vector3> GetMonsterPath()
+    {
+        if (monsterPath.Count == 0)
+        {
+            GetMonsterWayPoints();
+        }
+        
+        return monsterPath;
     }
 
     private void InitializeTileDic()
@@ -87,5 +107,86 @@ public class TileManager
                 // Instantiate(test, node.worldPos, Quaternion.identity);
             }
         }
+    }
+
+    private void GetMonsterWayPoints()
+    {
+        // 길찾기 시작하기
+        monsterPath.Clear();
+
+        if (monsterSpawnTile == null || monsterGoalTile == null)
+        {
+            Logger.ErrorLog($"[TileManager] monsterSpawnTile : {monsterSpawnTile}\n monsterGoalTile : {monsterGoalTile}");
+            return;
+        }
+        
+        Queue<TileNode> currentPath = new Queue<TileNode>();
+        HashSet<TileNode> visited = new HashSet<TileNode>();
+        
+        currentPath.Enqueue(monsterSpawnTile);
+        visited.Add(monsterSpawnTile);
+
+        bool isFound = false;
+
+        while (currentPath.Count > 0)
+        {
+            var curNode =  currentPath.Dequeue();
+            if (curNode.tileType == TileType.Goal)
+            {
+                isFound = true;
+                break;
+            }
+
+            foreach (var neighbor in GetNeighbors(curNode))
+            {
+                if (visited.Contains(neighbor))
+                {
+                    continue;
+                }
+                
+                visited.Add(neighbor);
+                currentPath.Enqueue(neighbor);
+                neighbor.parent = curNode;
+            }
+        }
+        
+        if (!isFound)
+        {
+            Logger.ErrorLog($"[TileManager] 길을 찾을 수 없습니다.");
+            return;
+        }
+        
+        Stack<Vector3> path = new Stack<Vector3>();
+        TileNode nodePtr = monsterGoalTile;
+
+        while (nodePtr != null)
+        {
+            path.Push(nodePtr.worldPos);
+            nodePtr = nodePtr.parent;
+        }
+
+        monsterPath = path;
+    }
+
+    private IEnumerable<TileNode> GetNeighbors(TileNode cur)
+    {
+        foreach (var offset in neighborOffset)
+        {
+            var neighborPos = cur.cellPos + offset;
+            if (tiles.TryGetValue(neighborPos, out TileNode neighbor))
+            {
+                if (IsWalkable(neighbor))
+                {
+                    yield return neighbor;
+                }
+            }
+        }
+    }
+
+    private bool IsWalkable(TileNode neighbor)
+    {
+        return neighbor.tileType == TileType.Road
+            || neighbor.tileType == TileType.Spawn
+            || neighbor.tileType == TileType.Goal;
     }
 }

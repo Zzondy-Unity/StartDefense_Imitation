@@ -9,10 +9,17 @@ public class GameManager : SingletonDontDestroy<GameManager>
     
     private ResourceManager _resourceManager;
     private SoundManager _soundManager;
+    private DataManager _dataManager;
     
     public static ResourceManager Resource { get { return Instance._resourceManager; } }
     public static SoundManager Sound { get { return Instance._soundManager; } }
     public static SceneController Scene { get { return Instance._sceneController; } }
+    public static DataManager Data { get { return Instance._dataManager; } }
+    
+    public static ObjectPoolManager Pool
+    {
+        get { return Instance._sceneController.curSceneManager?.objectPoolManager; }
+    }
 
     protected override void Awake()
     {
@@ -28,10 +35,12 @@ public class GameManager : SingletonDontDestroy<GameManager>
     private void InitializeManagers()
     {
         _resourceManager = new ResourceManager();
+        _dataManager = new DataManager();
         _soundManager = CreateManager<SoundManager>(Instance.transform);
         _sceneController = CreateManager<SceneController>(Instance.transform);
 
         _resourceManager.Init();
+        _dataManager.Init();
         _soundManager.Init();
 
         
