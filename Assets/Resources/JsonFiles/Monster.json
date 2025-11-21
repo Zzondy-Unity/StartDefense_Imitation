@@ -1,0 +1,20 @@
+{"datas":[
+  {
+    "monsterId": 21000001,
+    "maxHealth": 10,
+    "moveSpeed": 1.0,
+    "resourceKey": "Monster/Prefab/normalMonster_01"
+  },
+  {
+    "monsterId": 21000002,
+    "maxHealth": 7,
+    "moveSpeed": 1.5,
+    "resourceKey": "Monster/Prefab/normalMonster_02"
+  },
+  {
+    "monsterId": 22000001,
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01"
+  }
+]}

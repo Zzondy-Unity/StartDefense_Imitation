@@ -6,16 +6,31 @@ using UnityEngine;
 public class GameManager : SingletonDontDestroy<GameManager>
 {
     private SceneController _sceneController;
-    
+
     private ResourceManager _resourceManager;
     private SoundManager _soundManager;
     private DataManager _dataManager;
-    
-    public static ResourceManager Resource { get { return Instance._resourceManager; } }
-    public static SoundManager Sound { get { return Instance._soundManager; } }
-    public static SceneController Scene { get { return Instance._sceneController; } }
-    public static DataManager Data { get { return Instance._dataManager; } }
-    
+
+    public static ResourceManager Resource
+    {
+        get { return Instance._resourceManager; }
+    }
+
+    public static SoundManager Sound
+    {
+        get { return Instance._soundManager; }
+    }
+
+    public static SceneController Scene
+    {
+        get { return Instance._sceneController; }
+    }
+
+    public static DataManager Data
+    {
+        get { return Instance._dataManager; }
+    }
+
     public static ObjectPoolManager Pool
     {
         get { return Instance._sceneController.curSceneManager?.objectPoolManager; }
@@ -24,10 +39,14 @@ public class GameManager : SingletonDontDestroy<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        
+        if (_instance != this)
+        {
+            return;
+        }
+
         InitializeManagers();
     }
-    
+
     /// <summary>
     /// 매니저를 생성 및 초기화합니다.
     /// MonoBehaviour인 매니저는 CreateManager를하고 순서에 맞게 초기화합니다.
@@ -39,11 +58,10 @@ public class GameManager : SingletonDontDestroy<GameManager>
         _soundManager = CreateManager<SoundManager>(Instance.transform);
         _sceneController = CreateManager<SceneController>(Instance.transform);
 
+        _sceneController.Init();
         _resourceManager.Init();
         _dataManager.Init();
         _soundManager.Init();
-
-        
     }
 
     private T CreateManager<T>(Transform parent) where T : Component, IManager
@@ -55,7 +73,7 @@ public class GameManager : SingletonDontDestroy<GameManager>
             manager = obj.AddComponent<T>();
             obj.transform.SetParent(parent);
         }
-        
+
         return manager;
     }
 }

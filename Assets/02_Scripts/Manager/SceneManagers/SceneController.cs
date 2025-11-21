@@ -11,17 +11,13 @@ public class SceneController : MonoBehaviour, IManager
     public BaseSceneManager curSceneManager { get; private set; }
     
     private Coroutine loadingCoroutine;
-
-    private void Awake()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDestroy()
+    
+    public void Init()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
+    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         curSceneManager = FindObjectOfType<BaseSceneManager>();
@@ -29,6 +25,7 @@ public class SceneController : MonoBehaviour, IManager
         {
             curSceneManager.Init();
         }
+        OnEnter();
     }
     
     // 씬 전환 기능
@@ -57,7 +54,7 @@ public class SceneController : MonoBehaviour, IManager
         }
 
         loadingCoroutine = null;
-        OnEnter();
+        
     }
 
     private void OnExit()
@@ -65,13 +62,10 @@ public class SceneController : MonoBehaviour, IManager
         curSceneManager?.OnExit();
     }
 
+    // 씬 로딩 전에 호출됨
     private void OnEnter()
     {
+        Logger.Log($"[SceneController] Entering scene. Scene:{curScene}, curSceneManager:{curSceneManager}");
         curSceneManager?.OnEnter();
-    }
-
-    public void Init()
-    {
-        
     }
 }

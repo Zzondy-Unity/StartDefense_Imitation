@@ -19,6 +19,15 @@ public enum SFX
     
 }
 
+public enum Grade
+{
+    common = 1,
+    normal,
+    rare,
+    epic,
+    legendary,
+}
+
 public enum SceneName
 {
     StartScene,

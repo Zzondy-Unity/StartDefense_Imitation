@@ -1,23 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class GameSceneManager : BaseSceneManager
 {
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private Transform[] waypointTransforms;
+
+    public int RoundNumber { get; } = 1;
     
     public TileManager Tile { get; private set; }
     public WaveManager Wave { get; private set; }
 
     public override SceneName curScene { get;} = SceneName.GameScene;
 
-    private Coroutine gameFlowCoroutine;
-
     public override void Init()
     {
         base.Init();
         
+        Logger.Log($"[GameSceneManager] GameScene Initialized.");
         if (tilemap == null)
         {
             if (GameObject.FindGameObjectWithTag("Tilemap").TryGetComponent<Tilemap>(out Tilemap tile))
@@ -30,34 +30,25 @@ public class GameSceneManager : BaseSceneManager
                 return;
             }
         }
-        Tile = new TileManager(tilemap);
+
+        Vector3[] waypoints = new Vector3[waypointTransforms.Length];
+        for (int i = 0; i < waypointTransforms.Length; i++)
+        {
+            waypoints[i] = waypointTransforms[i].position;
+        }
+        Tile = new TileManager(tilemap, waypoints, this);
         Wave = GetComponentInChildren<WaveManager>();
+        Wave.Init(RoundNumber, this);
     }
 
     public override void OnEnter()
     {
-        gameFlowCoroutine = StartCoroutine(GameStart());
+        Logger.Log($"[GameSceneManager] GameScene Loaded and OnEntered. Round start!");
+        Wave.RoundStart();
     }
 
     public override void OnExit()
     {
-        StopCoroutine(gameFlowCoroutine);
-        gameFlowCoroutine = null;
-    }
-
-    private IEnumerator GameStart()
-    {
-        // wave 시작 대기
-        yield return null;
         
-        // wave 시작
-
-        yield return null;
-        
-        // 몬스터 일정 주기로 스폰
-
-        yield return null;
-        
-        // 모든 몬스터 잡았을 때, 게임 승패 로직 추가
     }
 }

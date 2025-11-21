@@ -3,10 +3,17 @@ using UnityEngine;
 
 public class HealthSystem
 {
-    private int maxHealth;
-    private int currentHealth;
+    private float maxHealth;
+    private float currentHealth;
 
     public event Action OnDeath;
+
+    public HealthSystem(MonsterData data)
+    {
+        maxHealth = data.maxHealth;
+        currentHealth = maxHealth;
+        Restore();
+    }
 
     public bool TakeDamage(int damage)
     {

@@ -7,6 +7,5 @@ public class HeroData
 	public float attack;
 	public string resourceKey;
 	public int combinationHero;
-	public string 코드;
 
 }

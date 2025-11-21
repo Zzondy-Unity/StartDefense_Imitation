@@ -1,0 +1,20 @@
+{"datas":[
+  {
+    "roundNum": 1,
+    "waveIndex": 1,
+    "totalSpawn": 10,
+    "spawnMonsterId": 21000001
+  },
+  {
+    "roundNum": 1,
+    "waveIndex": 2,
+    "totalSpawn": 10,
+    "spawnMonsterId": 21000002
+  },
+  {
+    "roundNum": 1,
+    "waveIndex": 3,
+    "totalSpawn": 1,
+    "spawnMonsterId": 22000001
+  }
+]}

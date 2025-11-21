@@ -9,6 +9,5 @@ public class HeroSO : ScriptableObject
 	public float attack;
 	public string resourceKey;
 	public int combinationHero;
-	public string 코드;
 
 }

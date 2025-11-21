@@ -1,20 +1,24 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(MonsterController))]
 public class Monster : MonoBehaviour, IDamageable, IPoolable
 {
     private HealthSystem healthSystem;
     private MonsterController monsterController;
     public Component poolKey { get; set; }
+    public MonsterData data { get; private set; }
 
-    public void Init(Vector3[] waypoints)
+    public void Init(MonsterData monsterData)
     {
+        data = monsterData;
         if (healthSystem == null)
         {
-            healthSystem = new HealthSystem();
+            healthSystem = new HealthSystem(data);
             if (TryGetComponent<MonsterController>(out MonsterController _monsterController))
             {
                 monsterController = _monsterController;
+                monsterController.Init(data);
             }
             else
             {
@@ -26,7 +30,8 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
             Regenerate();
         }
         
-        monsterController.SetWaypoints(waypoints);
+        healthSystem.OnDeath -= OnDeath;
+        healthSystem.OnDeath += OnDeath;
     }
 
     public void Regenerate()
@@ -45,13 +50,19 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
         return healthSystem.TakeDamage(damage);
     }
 
+    private void OnDeath()
+    {
+        monsterController.OnDeath();
+        EventManager.Publish(GameEventType.MonsterDeath);
+    }
+
     public void OnSpawnFromPool()
     {
-        healthSystem.OnDeath += monsterController.OnDeath;
+        
     }
 
     public void OnReturnToPool()
     {
-        healthSystem.OnDeath -= monsterController.OnDeath;
+        
     }
 }
