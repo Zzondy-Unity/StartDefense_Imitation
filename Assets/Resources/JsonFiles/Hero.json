@@ -1,0 +1,52 @@
+{"datas":[
+  {
+    "heroId": 11000001,
+    "attackRate": 0.5,
+    "attack": 2.0,
+    "resourceKey": "Hero/Image/common_01",
+    "combinationHero": 12000001,
+    "코드": "영웅 = 1"
+  },
+  {
+    "heroId": 11000002,
+    "attackRate": 0.25,
+    "attack": 4.0,
+    "resourceKey": "Hero/Image/common_02",
+    "combinationHero": 13000002,
+    "코드": "몬스터 = 2"
+  },
+  {
+    "heroId": 12000001,
+    "attackRate": 1.0,
+    "attack": 2.0,
+    "resourceKey": "Hero/Image/normal_01",
+    "combinationHero": 13000001
+  },
+  {
+    "heroId": 13000001,
+    "attackRate": 1.5,
+    "attack": 2.0,
+    "resourceKey": "Hero/Image/rare_01",
+    "combinationHero": 14000001
+  },
+  {
+    "heroId": 13000002,
+    "attackRate": 1.5,
+    "attack": 3.0,
+    "resourceKey": "Hero/Image/rare_02",
+    "combinationHero": 14000001
+  },
+  {
+    "heroId": 14000001,
+    "attackRate": 2.0,
+    "attack": 5.0,
+    "resourceKey": "Hero/Image/epic_01",
+    "combinationHero": 15000001
+  },
+  {
+    "heroId": 15000001,
+    "attackRate": 3.0,
+    "attack": 10.0,
+    "resourceKey": "Hero/Image/legendary_01"
+  }
+]}
