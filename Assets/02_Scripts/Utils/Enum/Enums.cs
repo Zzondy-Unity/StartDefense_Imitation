@@ -34,3 +34,16 @@ public enum SceneName
     LobbyScene,
     GameScene,
 }
+
+public enum MoneyType
+{
+    gold,
+    mineral,
+}
+
+public enum UnitPopupMode
+{
+    Summon,
+    Exchange,
+    Transcend,
+}
