@@ -15,19 +15,15 @@ public class HealthSystem
         Restore();
     }
 
-    public bool TakeDamage(int damage)
+    public bool TakeDamage(float damage)
     {
-        if (damage <= 0)
-        {
-            Dead();
-            return false;
-        }
+        if (damage <= 0) return false;
 
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            return true;
+            Dead();
         }
 
         return true;

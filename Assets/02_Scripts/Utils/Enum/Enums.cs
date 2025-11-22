@@ -21,11 +21,11 @@ public enum SFX
 
 public enum Grade
 {
-    common = 1,
-    normal,
-    rare,
-    epic,
-    legendary,
+    common = 1, //흰색
+    normal,     //초록
+    rare,       //파랑
+    epic,       //보라
+    legendary,  //노랑
 }
 
 public enum SceneName

@@ -45,7 +45,7 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
     /// </summary>
     /// <param name="damage">데미지 총량</param>
     /// <returns>데미지를 입으면 true를 반환합니다.</returns>
-    public bool TakeDamage(int damage)
+    public bool TakeDamage(float damage)
     {
         return healthSystem.TakeDamage(damage);
     }
@@ -53,7 +53,7 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
     private void OnDeath()
     {
         monsterController.OnDeath();
-        EventManager.Publish(GameEventType.MonsterDeath);
+        EventManager.Publish(GameEventType.MonsterDeath, this);
     }
 
     public void OnSpawnFromPool()

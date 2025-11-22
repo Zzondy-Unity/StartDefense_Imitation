@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Utility
+public static class Utility
 {
     private static readonly string goldImage = "Images/Gold";
     private static readonly string mineralImage = "Images/Mineral";
@@ -55,5 +55,36 @@ public class Utility
         }
 
         return color;
+    }
+
+    public static Color GetColorByGrade(Grade grade)
+    {
+        Color color = Color.white;
+
+        switch (grade)
+        {
+            case Grade.common:
+                color = Color.white;
+                break;
+            case Grade.normal:
+                color = Color.green;
+                break;
+            case Grade.rare:
+                color = Color.blue;
+                break;
+            case Grade.epic:
+                color = Color.magenta;
+                break;
+            case Grade.legendary:
+                color = Color.yellow;
+                break;
+        }
+
+        return color;
+    }
+
+    public static bool Contains(this LayerMask layerMask, int layer)
+    {
+        return (layerMask.value & (1 << layer)) != 0;
     }
 }

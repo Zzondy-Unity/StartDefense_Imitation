@@ -61,36 +61,6 @@ public class TileManager
                 node.worldPos = tileWorldPos;
 
                 tiles.Add(node.cellPos, node);
-
-                // Logger.Log($"CellPosition {cellPos} is {node.tileType}" +
-                //            $"\n WorldPos is {node.worldPos})");
-                // var test = Managers.Resource.LoadAsset<GameObject>("Circle");
-                // var sr = test.GetComponent<SpriteRenderer>();
-                // switch (node.tileType)
-                // {
-                //     case TileType.Road:
-                //         sr.color = Color.white;
-                //         break;
-                //     case TileType.Spawn:
-                //         sr.color = Color.black;
-                //         break;
-                //     case TileType.Goal:
-                //         sr.color = Color.blue;
-                //         break;
-                //     case TileType.Block:
-                //         sr.color = Color.red;
-                //         break;
-                //     case TileType.Normal:
-                //         sr.color = Color.yellow;
-                //         break;
-                //     case TileType.Wall:
-                //         sr.color = Color.green;
-                //         break;
-                //     case TileType.FixTile:
-                //         sr.color = Color.magenta;
-                //         break;
-                // }
-                // Instantiate(test, node.worldPos, Quaternion.identity);
             }
         }
     }

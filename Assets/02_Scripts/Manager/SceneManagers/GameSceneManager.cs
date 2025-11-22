@@ -5,11 +5,13 @@ public class GameSceneManager : BaseSceneManager
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Transform[] waypointTransforms;
+    [SerializeField] private int Round;
 
-    public int RoundNumber { get; } = 1;
+    public int RoundNumber {get {return Round;}}
     
     public TileManager Tile { get; private set; }
     public WaveManager Wave { get; private set; }
+    public StageManager Stage { get; private set; }
 
     public override SceneName curScene { get;} = SceneName.GameScene;
 
@@ -17,7 +19,6 @@ public class GameSceneManager : BaseSceneManager
     {
         base.Init();
         
-        Logger.Log($"[GameSceneManager] GameScene Initialized.");
         if (tilemap == null)
         {
             if (GameObject.FindGameObjectWithTag("Tilemap").TryGetComponent<Tilemap>(out Tilemap tile))
@@ -38,12 +39,13 @@ public class GameSceneManager : BaseSceneManager
         }
         Tile = new TileManager(tilemap, waypoints, this);
         Wave = GetComponentInChildren<WaveManager>();
+        Stage = GetComponentInChildren<StageManager>();
         Wave.Init(RoundNumber, this);
+        Stage.Init();
     }
 
     public override void OnEnter()
     {
-        Logger.Log($"[GameSceneManager] GameScene Loaded and OnEntered. Round start!");
         Wave.RoundStart();
     }
 
