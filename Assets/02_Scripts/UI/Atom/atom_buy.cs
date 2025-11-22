@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class atom_buy : MonoBehaviour
+public class atom_buy : UIPopUp
 {
    [SerializeField] private TextMeshProUGUI textTMP;
    [SerializeField] private Button button;
