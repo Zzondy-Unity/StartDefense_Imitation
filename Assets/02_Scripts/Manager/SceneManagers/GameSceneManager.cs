@@ -7,6 +7,7 @@ public class GameSceneManager : BaseSceneManager
     [SerializeField] private Transform[] waypointTransforms;
     [SerializeField] private int Round = 1;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Commander commander;
 
     public int RoundNumber {get {return Round;}}
     public int SummonCost { get; } = 20;
@@ -14,6 +15,7 @@ public class GameSceneManager : BaseSceneManager
     public TileManager Tile { get; private set; }
     public WaveManager Wave { get; private set; }
     public StageManager Stage { get; private set; }
+    public Commander Commander => commander;
 
     public override SceneName curScene { get;} = SceneName.GameScene;
 
@@ -47,6 +49,9 @@ public class GameSceneManager : BaseSceneManager
         Tile = new TileManager(tilemap, waypoints, this);
         Wave = GetComponentInChildren<WaveManager>();
         Stage = GetComponentInChildren<StageManager>();
+        
+        // 초기화 순서
+        commander.Init();
         Wave.Init(RoundNumber, this);
         Stage.Init();
     }

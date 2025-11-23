@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(HeroAttackController))]
-public class Hero : MonoBehaviour , IPoolable
+public class Hero : MonoBehaviour , IPoolable, IAttacker
 {
     public HeroData data { get; private set; }
     public int id { get; private set; }
@@ -31,7 +31,7 @@ public class Hero : MonoBehaviour , IPoolable
         if (TryGetComponent<HeroAttackController>(out var controller))
         {
             attackController = controller;
-            attackController.Init(data);
+            attackController.Init(data, this);
         }
         
         canUpImage.gameObject.SetActive(false);

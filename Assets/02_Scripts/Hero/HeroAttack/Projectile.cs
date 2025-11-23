@@ -14,8 +14,10 @@ public class Projectile : MonoBehaviour, IPoolable
     private float speed = 10f;
     private float radius;
     private float damage;
+    
+    public IAttacker attacker { get; private set; }
 
-    public void Init(LayerMask targetLayer, float radius, float damage, Monster target)
+    public void Init(LayerMask targetLayer, float radius, float damage, Monster target, IAttacker attacker)
     {
         targetLayerMask = targetLayer;
         this.radius = radius;
@@ -26,6 +28,7 @@ public class Projectile : MonoBehaviour, IPoolable
         direction.Normalize();
 
         this.gameObject.transform.right = direction;
+        this.attacker = attacker;
     }
 
     private void Update()
@@ -53,9 +56,9 @@ public class Projectile : MonoBehaviour, IPoolable
             {
                 if (damaged.Contains(monster) || !monster.gameObject.activeInHierarchy) continue;
 
-                if (damaged.Count > 3) break;   // 광역데미지는 3마리까지만
+                if (damaged.Count >= 3) break;   // 광역데미지는 3마리까지만
 
-                if (monster.TakeDamage(damage))
+                if (monster.TakeDamage(damage, attacker))
                 {
                     // 공격 성공시
                     damaged.Add(monster);
@@ -64,12 +67,6 @@ public class Projectile : MonoBehaviour, IPoolable
         }
         
         GameManager.Pool.ReturnToPool(this);
-    }
-
-
-    public void OnFire(Vector3 targetPos)
-    {
-        targetPosition = targetPos;
     }
 
     public Component poolKey { get; set; }

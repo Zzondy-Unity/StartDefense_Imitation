@@ -1,16 +1,16 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(MonsterController))]
-public class Monster : MonoBehaviour, IDamageable, IPoolable
+public class Monster : MonoBehaviour, IDamageable, IPoolable, IAttacker
 {
-    [SerializeField] private Slider healthSlider;
+    [SerializeField] private atom_sliderTxt healthSlider;
     
     private HealthSystem healthSystem;
-    private MonsterController monsterController;
+    public MonsterController monsterController { get; private set; }
     public Component poolKey { get; set; }
     public MonsterData data { get; private set; }
+
+    public float HP;
 
     public void Init(MonsterData monsterData)
     {
@@ -19,14 +19,14 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
         {
             if (healthSlider == null)
             {
-                healthSlider = GetComponentInChildren<Slider>();
+                healthSlider = GetComponentInChildren<atom_sliderTxt>();
             }
             
-            healthSystem = new HealthSystem(data, healthSlider);
+            healthSystem = new HealthSystem(data.maxHealth, healthSlider);
             if (TryGetComponent<MonsterController>(out MonsterController _monsterController))
             {
                 monsterController = _monsterController;
-                monsterController.Init(data);
+                monsterController.Init(data, this);
             }
             else
             {
@@ -42,12 +42,14 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
         
         healthSystem.OnDeath -= OnDeath;
         healthSystem.OnDeath += OnDeath;
+        HP = data.maxHealth;
     }
 
     public void Regenerate()
     {
         healthSystem.Restore();
         monsterController.OnRestore();
+        HP = data.maxHealth;
     }
 
     /// <summary>
@@ -55,9 +57,18 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
     /// </summary>
     /// <param name="damage">데미지 총량</param>
     /// <returns>데미지를 입으면 true를 반환합니다.</returns>
-    public bool TakeDamage(float damage)
+    public bool TakeDamage(float damage, IAttacker attacker)
     {
-        return healthSystem.TakeDamage(damage);
+        bool damaged = healthSystem.TakeDamage(damage, attacker);
+        if (damaged)
+        {
+            // MonsterHitState로 가고자 했으나
+            // 데미지를 받는중에 이동할 수 없게되는거같아서 고민중
+            // Logger.Log($"{attacker} attacked {gameObject.name} amount : {damage}");
+        }
+
+        HP = healthSystem.currentHealth;
+        return damaged;
     }
 
     private void OnDeath()

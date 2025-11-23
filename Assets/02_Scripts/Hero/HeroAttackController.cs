@@ -25,11 +25,14 @@ public class HeroAttackController : MonoBehaviour
 
     private bool isAlive = false;
 
-    public void Init(HeroData data)
+    private IAttacker attacker;
+
+    public void Init(HeroData data, IAttacker attacker)
     {
         EventManager.UnSubscribe(GameEventType.MonsterDeath, OnMonsterDead);
         EventManager.Subscribe(GameEventType.MonsterDeath, OnMonsterDead);
         
+        this.attacker = attacker;
         attackSpeed = data.attackRate;
         attack = data.attack;
         attackRange = data.attackRange;
@@ -103,7 +106,7 @@ public class HeroAttackController : MonoBehaviour
     private void Attack()
     {
         var bullet = GameManager.Pool.GetFromPool(bulletPrefab);
-        bullet.Init(monsterLayer, 3f, attack, curAttackMonster);
+        bullet.Init(monsterLayer, 3f, attack, curAttackMonster, attacker);
         bullet.transform.position = transform.position;
     }
 

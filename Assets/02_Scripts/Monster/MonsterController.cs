@@ -12,8 +12,9 @@ public class MonsterController : MonoBehaviour
     
     public MonsterData monsterData { get; private set; }
     public Rigidbody2D rb2D { get; private set; }
+    public IAttacker attacker { get; private set; }
 
-    public void Init(MonsterData data)
+    public void Init(MonsterData data, IAttacker attacker)
     {
         stateMachine = new MonsterStateMachine();
         rb2D = GetComponent<Rigidbody2D>();
@@ -25,8 +26,10 @@ public class MonsterController : MonoBehaviour
             { typeof(MonsterMoveState), new MonsterMoveState(this) },
             { typeof(MonsterHitState), new MonsterHitState(this) },
             { typeof(MonsterAttackState), new MonsterAttackState(this) },
+            { typeof(MonsterIdleState), new MonsterIdleState(this) },
         };
 
+        this.attacker = attacker;
         ChangeMonsterState<MonsterMoveState>();
     }
 
@@ -62,6 +65,7 @@ public class MonsterController : MonoBehaviour
 
     public void OnDeath()
     {
+        ChangeMonsterState<MonsterIdleState>();
         isAlive = false;
     }
 }

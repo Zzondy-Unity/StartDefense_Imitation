@@ -1,20 +1,19 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HealthSystem
 {
-    private float maxHealth;
-    private float currentHealth;
-    Slider healthSlider;
+    public float maxHealth { get; private set; }
+    public float currentHealth { get; private set; }
+    atom_sliderTxt healthSlider;
 
     public event Action OnDeath;
 
-    public HealthSystem(MonsterData data, Slider slider)
+    public HealthSystem(float maxHealth, atom_sliderTxt slider)
     {
         this.healthSlider = slider;
-        maxHealth = data.maxHealth;
         currentHealth = maxHealth;
+        this.maxHealth = maxHealth;
         
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
@@ -22,10 +21,12 @@ public class HealthSystem
         Restore();
     }
 
-    public bool TakeDamage(float damage)
+    public bool TakeDamage(float damage, IAttacker attacker)
     {
         if (damage <= 0) return false;
-
+        
+        // Logger.Log($"{attacker} attacke {damage}");
+        
         currentHealth -= damage;
         healthSlider.value = currentHealth;
         if (currentHealth <= 0)

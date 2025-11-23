@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd125c0f60e272144930c6e8a899285f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 7331138706365318378}
+  healthSlider: {fileID: 9124265567077430639}
 --- !u!114 &-2959362366599568304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,14 +318,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 530625272629288471, guid: 99260b7e357da7d4ca0548371cef6363, type: 3}
   m_PrefabInstance: {fileID: 5724762572250557047}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7331138706365318378 stripped
+--- !u!114 &9124265567077430639 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3084718310851849885, guid: 99260b7e357da7d4ca0548371cef6363, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3597696649977683736, guid: 99260b7e357da7d4ca0548371cef6363, type: 3}
   m_PrefabInstance: {fileID: 5724762572250557047}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0887456d30cd9234b890da6bd24010bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
