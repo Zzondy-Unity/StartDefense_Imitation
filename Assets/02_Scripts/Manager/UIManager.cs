@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour, IManager
 
         if (isOpen)
         {
-            Logger.Log($"{type} is already open.");
+            Logger.Log($"{type} is already open."); 
             return ui;
         }
 

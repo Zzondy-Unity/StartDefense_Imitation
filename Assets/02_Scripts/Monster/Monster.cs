@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(MonsterController))]
 public class Monster : MonoBehaviour, IDamageable, IPoolable
 {
+    [SerializeField] private Slider healthSlider;
+    
     private HealthSystem healthSystem;
     private MonsterController monsterController;
     public Component poolKey { get; set; }
@@ -14,7 +17,12 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
         data = monsterData;
         if (healthSystem == null)
         {
-            healthSystem = new HealthSystem(data);
+            if (healthSlider == null)
+            {
+                healthSlider = GetComponentInChildren<Slider>();
+            }
+            
+            healthSystem = new HealthSystem(data, healthSlider);
             if (TryGetComponent<MonsterController>(out MonsterController _monsterController))
             {
                 monsterController = _monsterController;
@@ -24,6 +32,8 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
             {
                 monsterController = gameObject.AddComponent<MonsterController>();
             }
+
+            
         }
         else
         {
@@ -54,6 +64,7 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable
     {
         monsterController.OnDeath();
         EventManager.Publish(GameEventType.MonsterDeath, this);
+        GameManager.Pool.ReturnToPool(this);
     }
 
     public void OnSpawnFromPool()

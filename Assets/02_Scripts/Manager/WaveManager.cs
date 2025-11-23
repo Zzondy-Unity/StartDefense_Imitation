@@ -45,7 +45,7 @@ public class WaveManager : MonoBehaviour
 
         // 라운드정보 초기화
         curRound = roundNumber;
-
+        
         // 라운드별 웨이브 데이터 초기화
         curWaveDatas.Clear();
         var waveDatas = GameManager.Data.GetWaveDataByRound(roundNumber);

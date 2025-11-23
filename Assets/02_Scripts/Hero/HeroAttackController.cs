@@ -6,6 +6,7 @@ public class HeroAttackController : MonoBehaviour
 {
     public float attackSpeed { get; private set; }
     public float attack { get; private set; }
+    public float attackRange { get; private set; }
     
     private CircleCollider2D attackCollider;
     private LayerMask monsterLayer;
@@ -14,6 +15,8 @@ public class HeroAttackController : MonoBehaviour
 
     private float lastAttack = 0;
     private Monster curAttackMonster;
+
+    private Projectile bulletPrefab;
 
     private float attackInterval
     {
@@ -29,11 +32,14 @@ public class HeroAttackController : MonoBehaviour
         
         attackSpeed = data.attackRate;
         attack = data.attack;
+        attackRange = data.attackRange;
         
         attackCollider = GetComponent<CircleCollider2D>();
+        attackCollider.radius = attackRange;
         isAlive = true;
         
         monsterLayer = LayerMask.GetMask("monster");
+        bulletPrefab = GameManager.Resource.LoadAsset<Projectile>(data.bulletKey);
     }
 
     public void OnDead()
@@ -96,9 +102,9 @@ public class HeroAttackController : MonoBehaviour
 
     private void Attack()
     {
-        // 투사체발사?
-        // 투사체가 날아가다가 닿으면 범위공격이네
-        
+        var bullet = GameManager.Pool.GetFromPool(bulletPrefab);
+        bullet.Init(monsterLayer, 3f, attack, curAttackMonster);
+        bullet.transform.position = transform.position;
     }
 
     public void OnMonsterDead(object org)
@@ -131,6 +137,7 @@ public class HeroAttackController : MonoBehaviour
 
         if (curAttackMonster == null)
         {
+            Logger.Log($"공격할 수 없습니다.");
             return false;
         }
 
@@ -161,5 +168,23 @@ public class HeroAttackController : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.UnSubscribe(GameEventType.MonsterDeath, OnMonsterDead);
+    }
+    
+    private void OnDrawGizmos()
+    {
+        // 공격 범위(Trigger Collider)를 기즈모로 그리기
+        // CircleCollider2D 를 공격 범위로 쓰고 있다고 가정
+        var circle = GetComponent<CircleCollider2D>();
+        if (circle == null)
+            return;
+
+        // 장면 뷰에서 보기 좋게 색 지정
+        Gizmos.color = Color.red;
+
+        // 2D라도 DrawWireSphere 를 써도 됩니다(씬 뷰에서 원처럼 보입니다).
+        // 로컬 스케일이 적용되도록 radius * scale 처리
+        float radius = circle.radius * Mathf.Max(transform.localScale.x, transform.localScale.y);
+
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

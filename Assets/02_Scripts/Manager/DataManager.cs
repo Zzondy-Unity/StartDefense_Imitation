@@ -118,7 +118,7 @@ public class DataManager : IManager
     public List<MonsterWaveData> GetWaveDataByRound(int round)
     {
         List<MonsterWaveData> monsterWaves = waveDataBase.TryGetValue(round, out List<MonsterWaveData> list) ? list : null;
-        if (monsterWaves == null)
+        if (monsterWaves == null || monsterWaves.Count == 0)
         {
             Logger.WarningLog($"[DataManager] none of round : {round}");
             return null;

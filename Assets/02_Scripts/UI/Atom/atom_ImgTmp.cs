@@ -6,6 +6,8 @@ public class atom_ImgTmp : MonoBehaviour
 {
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _text;
+
+    public Image image => _image;
     
     public string text 
     {get

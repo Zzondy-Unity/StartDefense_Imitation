@@ -16,7 +16,7 @@ public class MonsterController : MonoBehaviour
     public void Init(MonsterData data)
     {
         stateMachine = new MonsterStateMachine();
-        rb2D = GetComponentInChildren<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
         
         monsterData = data;
         

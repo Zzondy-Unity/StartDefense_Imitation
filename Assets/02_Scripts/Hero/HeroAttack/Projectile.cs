@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour, IPoolable
@@ -14,14 +15,14 @@ public class Projectile : MonoBehaviour, IPoolable
     private float radius;
     private float damage;
 
-    public void Init(LayerMask targetLayer, float radius, float damage, Vector3 targetPos)
+    public void Init(LayerMask targetLayer, float radius, float damage, Monster target)
     {
         targetLayerMask = targetLayer;
         this.radius = radius;
         this.damage = damage;
-        this.targetPosition = targetPos;
+        this.targetPosition = target.transform.position;
         
-        Vector2 direction = targetPos - transform.position;
+        Vector2 direction = targetPosition - transform.position;
         direction.Normalize();
 
         this.gameObject.transform.right = direction;

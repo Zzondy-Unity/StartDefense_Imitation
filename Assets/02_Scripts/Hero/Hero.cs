@@ -13,6 +13,15 @@ public class Hero : MonoBehaviour , IPoolable
     [SerializeField] private Image canUpImage;
     [SerializeField] private Image gradeRing;
 
+    public bool CanUpgrade
+    {
+        get
+        {
+            var manager = GameManager.Scene.curSceneManager as GameSceneManager;
+            return manager.Stage.CanUpgrade(data);
+        }
+    }
+
     public void Init(HeroData _data)
     {
         data = _data;
@@ -22,7 +31,7 @@ public class Hero : MonoBehaviour , IPoolable
         if (TryGetComponent<HeroAttackController>(out var controller))
         {
             attackController = controller;
-            Init(_data);
+            attackController.Init(data);
         }
         
         canUpImage.gameObject.SetActive(false);

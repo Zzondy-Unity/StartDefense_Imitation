@@ -11,6 +11,7 @@ public class GameManager : SingletonDontDestroy<GameManager>
     private SoundManager _soundManager;
     private DataManager _dataManager;
     private UIManager _uiManager;
+    private InputManager _inputManager;
 
     public static ResourceManager Resource
     {
@@ -42,6 +43,11 @@ public class GameManager : SingletonDontDestroy<GameManager>
         get { return Instance._uiManager; }
     }
 
+    public static InputManager Input
+    {
+        get { return Instance._inputManager; }
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -61,10 +67,12 @@ public class GameManager : SingletonDontDestroy<GameManager>
     {
         _resourceManager = new ResourceManager();
         _dataManager = new DataManager();
+        _inputManager = CreateManager<InputManager>(Instance.transform);
         _soundManager = CreateManager<SoundManager>(Instance.transform);
         _sceneController = CreateManager<SceneController>(Instance.transform);
         _uiManager = CreateManager<UIManager>(Instance.transform);
 
+        _inputManager.Init();
         _sceneController.Init();
         _resourceManager.Init();
         _dataManager.Init();

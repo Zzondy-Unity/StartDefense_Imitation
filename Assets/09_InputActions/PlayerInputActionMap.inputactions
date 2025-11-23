@@ -1,6 +1,55 @@
 {
-    "version": 0,
+    "version": 1,
     "name": "PlayerInputActionMap",
-    "maps": [],
+    "maps": [
+        {
+            "name": "inputMap",
+            "id": "18f4a299-92e3-48ec-ab95-a32ae73822b8",
+            "actions": [
+                {
+                    "name": "mousePosition",
+                    "type": "Value",
+                    "id": "ff1a7faf-697c-4d0e-a6d9-b065e334c859",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "mouseClick",
+                    "type": "Button",
+                    "id": "cf759243-c7c4-4d47-b93e-1612163a1889",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bfef5430-d551-41df-b033-919280125a4b",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "mousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0956ca5-76fd-4fe0-ac86-8a360f23229c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "mouseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
     "controlSchemes": []
 }

@@ -3,48 +3,63 @@
     "heroId": 11000001,
     "attackRate": 0.5,
     "attack": 2.0,
+    "attackRange": 3.0,
     "resourceKey": "Hero/Prefab/common_01",
-    "combinationHero": 12000001
+    "combinationHero": 12000001,
+    "bulletKey": "Hero/Projectiles/Bullet"
   },
   {
     "heroId": 11000002,
     "attackRate": 0.25,
     "attack": 4.0,
+    "attackRange": 3.0,
     "resourceKey": "Hero/Prefab/common_02",
-    "combinationHero": 13000002
+    "combinationHero": 13000002,
+    "bulletKey": "Hero/Projectiles/Bullet"
   },
   {
     "heroId": 12000001,
     "attackRate": 1.0,
     "attack": 2.0,
+    "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/normal_01",
-    "combinationHero": 13000001
+    "combinationHero": 13000001,
+    "bulletKey": "Hero/Projectiles/Bullet"
   },
   {
     "heroId": 13000001,
     "attackRate": 1.5,
     "attack": 2.0,
+    "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/rare_01",
-    "combinationHero": 14000001
+    "combinationHero": 14000001,
+    "bulletKey": "Hero/Projectiles/Bullet"
   },
   {
     "heroId": 13000002,
     "attackRate": 1.5,
     "attack": 3.0,
+    "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/rare_02",
-    "combinationHero": 14000001
+    "combinationHero": 14000001,
+    "bulletKey": "Hero/Projectiles/Bullet"
   },
   {
     "heroId": 14000001,
     "attackRate": 2.0,
     "attack": 5.0,
+    "attackRange": 5.0,
     "resourceKey": "Hero/Prefab/epic_01",
-    "combinationHero": 15000001
+    "combinationHero": 15000001,
+    "bulletKey": "Hero/Projectiles/Bullet"
   },
   {
     "heroId": 15000001,
     "attackRate": 3.0,
     "attack": 10.0,
-    "resourceKey": "Hero/Prefab/legendary_01"
+    "attackRange": 6.0,
+    "resourceKey": "Hero/Prefab/legendary_01",
+    "combinationHero": 0,
+    "bulletKey": "Hero/Projectiles/Bullet"
   }
 ]}

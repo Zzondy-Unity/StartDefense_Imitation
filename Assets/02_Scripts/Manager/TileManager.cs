@@ -22,7 +22,7 @@ public class TileManager
         InitializeTileDic();
         // CalculateWayPoints();
     }
-    
+
     private void InitializeTileDic()
     {
         tiles.Clear();
@@ -63,6 +63,16 @@ public class TileManager
                 tiles.Add(node.cellPos, node);
             }
         }
+    }
+
+    public TileNode GetTileNode(Vector3 worldPos)
+    {
+        Vector3Int cellPos = tilemap.WorldToCell(worldPos);
+        if (tiles.TryGetValue(cellPos, out TileNode node))
+        {
+            return node;
+        }
+        return null;
     }
 
     public Vector3[] GetMonsterPath()
