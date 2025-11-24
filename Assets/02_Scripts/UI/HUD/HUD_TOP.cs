@@ -11,4 +11,13 @@ public class HUD_TOP : MonoBehaviour
     [SerializeField] private atom_Supply supply;
 
 
+    public void Init()
+    {
+        
+    }
+
+    public void Refresh()
+    {
+        
+    }
 }

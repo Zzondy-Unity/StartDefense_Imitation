@@ -74,6 +74,7 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable, IAttacker
     private void OnDeath()
     {
         monsterController.OnDeath();
+        EventManager.Publish(GameEventType.GetGold, 10); // 일단 킬당 10골드
         EventManager.Publish(GameEventType.MonsterDeath, this);
         GameManager.Pool.ReturnToPool(this);
     }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class GameSceneManager : BaseSceneManager
@@ -64,33 +65,80 @@ public class GameSceneManager : BaseSceneManager
         {
             mainCamera = Camera.main;
         }
+
+        // ui가 띄어져있으면 ui우선
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(screenPos);
         worldPos.z = 0;
         
         TileNode tileNode = Tile.GetTileNode(worldPos);
-        if (tileNode != null && tileNode.tileType == TileType.Normal)
+        Vector2 screen = mainCamera.WorldToScreenPoint(tileNode.worldPos);
+        if (tileNode != null)
         {
-            if (GameManager.UI.IsOpened<UISummon>())
+            if (tileNode.tileType == TileType.Normal)
             {
-                GameManager.UI.Hide<UISummon>();
+                // if (GameManager.UI.IsOpened<UISummon>())
+                // {
+                //     GameManager.UI.Hide<UISummon>();
+                // }
+                tileNode.Interact(screen);
             }
-            tileNode.Interact(screenPos);
+            else
+            {
+                if (GameManager.UI.IsOpened<UISummon>() != null)
+                {
+                    GameManager.UI.Hide<UISummon>();
+                }
+
+                if (GameManager.UI.IsOpened<UIUpgrade>() != null)
+                {
+                    GameManager.UI.Hide<UIUpgrade>();
+                }
+
+                if (GameManager.UI.IsOpened<UITrescend>() != null)
+                {
+                    GameManager.UI.Hide<UITrescend>();
+                }
+            }
+        }
+    }
+
+    private void OnGameEnd(object org)
+    {
+        if (org is bool isWin)
+        {
+            Wave.OnGameEnd(isWin);
+            Stage.OnGameEnd(isWin);
+            Tile.OnGameEnd(isWin);
+
+            GameManager.UI.Show<UIResult>(isWin);
         }
     }
     
     public override void OnEnter()
     {
         GameManager.Input.IsMouseLocked = false;
+        GameManager.Data.LoadPlayerData();
 
         GameManager.Input.onClick -= OnMouseClick;
         GameManager.Input.onClick += OnMouseClick;
-        
+
+        EventManager.Subscribe(GameEventType.GameEnd, OnGameEnd);
+
+        GameManager.UI.Show<UIGameHUD>();
         Wave.RoundStart();
     }
 
     public override void OnExit()
     {
+        GameManager.Data.SavePlayerData();
+        GameManager.Input.IsMouseLocked = true;
         
+        EventManager.UnSubscribe(GameEventType.GameEnd, OnGameEnd);
+        GameManager.UI.Hide<UIGameHUD>();
     }
 }

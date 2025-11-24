@@ -9,4 +9,14 @@ public class HUD_MIDDLE : MonoBehaviour
     [SerializeField] private Transform leftMineral;
     [SerializeField] private Transform rightMineral;
     [SerializeField] private Probe probePrefab;
+
+    public void Init()
+    {
+        
+    }
+
+    public void Refresh()
+    {
+        
+    }
 }

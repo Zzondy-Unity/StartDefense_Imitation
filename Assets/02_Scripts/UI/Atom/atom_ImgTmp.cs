@@ -8,16 +8,17 @@ public class atom_ImgTmp : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _text;
 
     public Image image => _image;
-    
-    public string text 
-    {get
+
+    public string text
     {
-        return _text.text;
+        get { return _text.text; }
+        set { _text.text = value; }
     }
-    set
+
+    public Color textColor
     {
-        _text.text = value;
-    }
+        get{ return _text.color;}
+        set { _text.color = value; }
     }
 
     public void Set(Image image, TextMeshProUGUI text)

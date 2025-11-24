@@ -7,6 +7,7 @@ public class Hero : MonoBehaviour , IPoolable, IAttacker
     public HeroData data { get; private set; }
     public int id { get; private set; }
     public Grade heroGrade { get; private set; }
+    public TileNode tile { get; private set; }
 
     private HeroAttackController attackController;
     
@@ -18,15 +19,20 @@ public class Hero : MonoBehaviour , IPoolable, IAttacker
         get
         {
             var manager = GameManager.Scene.curSceneManager as GameSceneManager;
-            return manager.Stage.CanUpgrade(data);
+            return manager.Stage.CanUpgrade(data.heroId);
+        }
+        set
+        {
+            ShowUpgrade(value);
         }
     }
 
-    public void Init(HeroData _data)
+    public virtual void Init(HeroData _data, TileNode _tile)
     {
         data = _data;
         id = _data.heroId;
         heroGrade = (Grade)(id / 1000000 % 10);
+        tile = _tile;
 
         if (TryGetComponent<HeroAttackController>(out var controller))
         {
@@ -38,14 +44,20 @@ public class Hero : MonoBehaviour , IPoolable, IAttacker
         gradeRing.color = Utility.GetColorByGrade(heroGrade);
     }
 
+    public virtual void ShowUpgrade(bool canUpgrade)
+    {
+        canUpImage.gameObject.SetActive(canUpgrade);
+    }
+
     public Component poolKey { get; set; }
-    public void OnSpawnFromPool()
+    public virtual void OnSpawnFromPool()
     {
         
     }
 
-    public void OnReturnToPool()
+    public virtual void OnReturnToPool()
     {
+        tile.curHero = null;
         attackController.OnDead();
     }
 }

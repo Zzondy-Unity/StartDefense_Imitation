@@ -153,7 +153,7 @@ public class UIManager : MonoBehaviour, IManager
         else if (closeUI.ContainsKey(type))
         {
             ui = closeUI[type].GetComponent<UIBase>();
-            closeUI.Remove(type);
+            // closeUI.Remove(type);
         }
         else
         {
@@ -179,6 +179,8 @@ public class UIManager : MonoBehaviour, IManager
 
     private void UpdateFrontUI(eUIPosition up)
     {
+        if (parents[(int)up].childCount <= 0) return;
+        
         FrontUI = null;
         var lastChild = parents[(int)up].GetChild(parents[(int)up].childCount - 1);
         if (lastChild)
@@ -231,6 +233,27 @@ public class UIManager : MonoBehaviour, IManager
         {
             popup.transform.SetSiblingIndex(parent.childCount - 1);
             FrontUI = popup;
+        }
+    }
+
+    public void RefreshAll()
+    {
+        foreach (var ui in openUI)
+        {
+            ui.Value.TryGetComponent(out UIBase uiBase);
+            if (uiBase is UIPopUp popup)
+            {
+                popup.Refresh();
+            }
+        }
+    }
+
+    public void Refresh<T>() where T : UIBase
+    {
+        var ui = IsOpened<T>();
+        if (ui != null)
+        {
+            ui.Refresh();
         }
     }
 

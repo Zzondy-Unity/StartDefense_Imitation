@@ -18,13 +18,19 @@ public class atom_buy : UIPopUp
                 afterClick?.Invoke();
             }
         );
-
+        
         Sprite moneySprite = Utility.GetMoneyImage(moneyType);
         costIT.image.sprite = moneySprite;
         textTMP.text = popupMode.ToString();
         button.image.color = Utility.GetColorByPopupMode(popupMode);
-
-        // TODO :: 구매가능여부에 따라 글자색 변경
+        
         costIT.text = cost.ToString();
     }
+
+    public void Refresh(bool canBuy)
+    {
+        costIT.textColor = canBuy ? Color.green : Color.red;
+        button.interactable = canBuy;
+    }
+    
 }

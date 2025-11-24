@@ -23,6 +23,11 @@ public class TileManager
         // CalculateWayPoints();
     }
 
+    public void OnGameEnd(bool isWin)
+    {
+        
+    }
+    
     private void InitializeTileDic()
     {
         tiles.Clear();

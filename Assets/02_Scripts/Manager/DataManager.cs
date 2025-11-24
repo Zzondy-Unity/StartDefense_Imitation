@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class DataManager : IManager
 {
+    private PlayerData playerData;
+    
     private readonly Dictionary<int, MonsterData> monsterDataBase = new();          // id에 해당하는 몬스터정보
     private readonly Dictionary<int, HeroData> heroDataBase = new();                // id에 해당하는 영웅정보
     private readonly Dictionary<int, List<MonsterWaveData>> waveDataBase = new();   // round별 웨이브 정보
+    private readonly Dictionary<int, List<int>> trescendHeroDic = new();
+    private readonly List<int> bountyList = new();
 
     // 등급별로 모아두고 사용할 때
     private readonly Dictionary<Grade, List<int>> gradeHeroData = new Dictionary<Grade, List<int>>()
@@ -22,11 +27,15 @@ public class DataManager : IManager
     private readonly string monsterFileName = "Monster";
     private readonly string waveFileName = "MonsterWave";
     
+    private readonly string playerFileName = "playerData.json";
+    
     public void Init()
     {
         HeroSheetParse();
         MonsterSheetParse();
         WaveSheetParse();
+        
+        LoadPlayerData();
     }
 
     private void HeroSheetParse()
@@ -40,6 +49,21 @@ public class DataManager : IManager
 
             heroDataBase.Add(hero.heroId, hero);
             gradeHeroData[heroGrade].Add(hero.heroId);
+            // 초월체 정보 저장
+            if (heroGrade == Grade.epic)
+            {
+                if (!trescendHeroDic.ContainsKey(hero.heroId))
+                {
+                    List<int> newTrescends = new();
+                    trescendHeroDic.Add(hero.heroId, newTrescends);
+                }
+                
+                int[] trecends = hero.transcendList;
+                for (int i = 0; i < trecends.Length; i++)
+                {
+                    trescendHeroDic[hero.heroId].Add(trecends[i]);
+                }
+            }
         }
     }
 
@@ -50,6 +74,10 @@ public class DataManager : IManager
         foreach (var monster in jsons)
         {
             monsterDataBase.Add(monster.monsterId, monster);
+            if (monster.monsterId / 100000 % 10 == 3)
+            {
+                bountyList.Add(monster.monsterId);
+            }
         }
     }
 
@@ -125,5 +153,30 @@ public class DataManager : IManager
         }
         
         return monsterWaves;
+    }
+
+    public PlayerData GetPlayerData()
+    {
+        return playerData;
+    }
+
+    public void SavePlayerData()
+    {
+        string toJson = JsonUtility.ToJson(playerData, true);
+        string path = Path.Combine(Application.persistentDataPath + playerFileName);
+        File.WriteAllText(path, toJson);
+    }
+
+    public void LoadPlayerData()
+    {
+        string path = Path.Combine(Application.persistentDataPath + playerFileName);
+        if (!File.Exists(path))
+        {
+            playerData = new PlayerData();
+            return;
+        }
+        
+        string json = File.ReadAllText(path);
+        playerData = JsonUtility.FromJson<PlayerData>(json);
     }
 }

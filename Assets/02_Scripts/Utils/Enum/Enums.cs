@@ -46,4 +46,5 @@ public enum UnitPopupMode
     Summon,
     Exchange,
     Transcend,
+    Upgrade,
 }

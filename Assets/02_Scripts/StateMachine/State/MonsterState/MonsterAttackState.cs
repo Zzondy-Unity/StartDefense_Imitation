@@ -33,7 +33,7 @@ public class MonsterAttackState : MonsterState
     private void AttackCommander()
     {
         var manager = GameManager.Scene.curSceneManager as GameSceneManager;
-        if (manager != null && manager.Commander.TakeDamage(attackDamage, monsterController.attacker))
+        if (manager != null && manager.Commander.isAlive && manager.Commander.TakeDamage(attackDamage, monsterController.attacker))
         {
             // TODO :: Shake Camera
         }

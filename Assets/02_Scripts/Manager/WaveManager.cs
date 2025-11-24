@@ -61,6 +61,22 @@ public class WaveManager : MonoBehaviour
         EventManager.Subscribe(GameEventType.MonsterDeath, OnMonsterDie);
     }
 
+    public void OnGameEnd(bool isWin)
+    {
+        Logger.Log($"GameEndCalled");
+        if (waveLoop != null)
+        {
+            StopCoroutine(waveLoop);
+            waveLoop = null;
+        }
+
+        if (timeCoroutine != null)
+        {
+            StopCoroutine(timeCoroutine);
+            timeCoroutine = null;
+        }
+    }
+
     private void OnDestroy()
     {
         EventManager.UnSubscribe(GameEventType.MonsterDeath, OnMonsterDie);
@@ -116,6 +132,10 @@ public class WaveManager : MonoBehaviour
     private void OnMonsterDie(object org)
     {
         curMonsterNumber--;
+        if (curMonsterNumber <= 0 && curWaveNumber == maxWaveNumber)
+        {
+            EventManager.Publish(GameEventType.GameEnd, true);
+        }
     }
 
     private void ResetTime()

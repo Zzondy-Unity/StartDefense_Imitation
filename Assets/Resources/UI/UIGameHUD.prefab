@@ -3689,8 +3689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063ef4e279d6461f9ded09cd350cc8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1575648050938854392}
-  text: {fileID: 2430418234658225995}
+  _image: {fileID: 0}
+  _text: {fileID: 0}
 --- !u!1 &6270055253020953537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4175,8 +4175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063ef4e279d6461f9ded09cd350cc8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 4748756863586083616}
-  text: {fileID: 2791272366345844267}
+  _image: {fileID: 4748756863586083616}
+  _text: {fileID: 2791272366345844267}
 --- !u!1 &6925161829423623105
 GameObject:
   m_ObjectHideFlags: 0
@@ -4322,8 +4322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063ef4e279d6461f9ded09cd350cc8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 3263490529484410649}
-  text: {fileID: 6549689461113318147}
+  _image: {fileID: 3263490529484410649}
+  _text: {fileID: 6549689461113318147}
 --- !u!1 &7138542876492252004
 GameObject:
   m_ObjectHideFlags: 0
@@ -5191,8 +5191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06cf08049d8655244a74332ddbd29fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: {fileID: 0}
-  mineral: {fileID: 0}
+  gold: {fileID: 6657102718398100501}
+  mineral: {fileID: 520128844325726525}
 --- !u!1 &9173730270311782879
 GameObject:
   m_ObjectHideFlags: 0

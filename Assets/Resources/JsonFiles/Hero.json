@@ -1,65 +1,145 @@
 {"datas":[
   {
     "heroId": 11000001,
+    "heroName": "a",
     "attackRate": 0.5,
     "attack": 2.0,
     "attackRange": 3.0,
     "resourceKey": "Hero/Prefab/common_01",
     "combinationHero": 12000001,
-    "bulletKey": "Hero/Projectiles/Bullet"
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
   },
   {
     "heroId": 11000002,
+    "heroName": "b",
     "attackRate": 0.25,
     "attack": 4.0,
     "attackRange": 3.0,
     "resourceKey": "Hero/Prefab/common_02",
     "combinationHero": 13000002,
-    "bulletKey": "Hero/Projectiles/Bullet"
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
   },
   {
     "heroId": 12000001,
+    "heroName": "c",
     "attackRate": 1.0,
     "attack": 2.0,
     "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/normal_01",
     "combinationHero": 13000001,
-    "bulletKey": "Hero/Projectiles/Bullet"
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
   },
   {
     "heroId": 13000001,
+    "heroName": "d",
     "attackRate": 1.5,
     "attack": 2.0,
     "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/rare_01",
     "combinationHero": 14000001,
-    "bulletKey": "Hero/Projectiles/Bullet"
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
   },
   {
     "heroId": 13000002,
+    "heroName": "e",
     "attackRate": 1.5,
     "attack": 3.0,
     "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/rare_02",
     "combinationHero": 14000001,
-    "bulletKey": "Hero/Projectiles/Bullet"
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
   },
   {
     "heroId": 14000001,
+    "heroName": "f",
     "attackRate": 2.0,
     "attack": 5.0,
     "attackRange": 5.0,
     "resourceKey": "Hero/Prefab/epic_01",
-    "combinationHero": 15000001,
-    "bulletKey": "Hero/Projectiles/Bullet"
+    "combinationHero": 0,
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      15000001,
+      15000002,
+      15000003,
+      15000004
+    ],
+    "spriteKey": "Image/legendary_01"
   },
   {
     "heroId": 15000001,
-    "attackRate": 3.0,
+    "heroName": "g",
+    "attackRate": 4.0,
     "attack": 10.0,
     "attackRange": 6.0,
     "resourceKey": "Hero/Prefab/legendary_01",
     "combinationHero": 0,
-    "bulletKey": "Hero/Projectiles/Bullet"
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "heroId": 15000002,
+    "heroName": "h",
+    "attackRate": 4.0,
+    "attack": 10.0,
+    "attackRange": 6.0,
+    "resourceKey": "Hero/Prefab/legendary_01",
+    "combinationHero": 0,
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "heroId": 15000003,
+    "heroName": "i",
+    "attackRate": 4.0,
+    "attack": 10.0,
+    "attackRange": 6.0,
+    "resourceKey": "Hero/Prefab/legendary_01",
+    "combinationHero": 0,
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "heroId": 15000004,
+    "heroName": "j",
+    "attackRate": 4.0,
+    "attack": 10.0,
+    "attackRange": 6.0,
+    "resourceKey": "Hero/Prefab/legendary_01",
+    "combinationHero": 0,
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
   }
 ]}

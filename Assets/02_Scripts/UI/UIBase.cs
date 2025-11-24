@@ -82,4 +82,9 @@ public class UIBase : MonoBehaviour
         // UI 닫기 애니메이션 실행
         if (uiAnim != null) uiAnim.SetTrigger("CloseUI");
     }
+
+    public virtual void Refresh()
+    {
+        
+    }
 }

@@ -8,10 +8,12 @@ public class Commander : MonoBehaviour, IDamageable, IAttacker
    public int maxHP = 200;
 
    private LayerMask monsterLayerMask;
+   public bool isAlive { get; private set; }
 
    public void Init()
    {
       monsterLayerMask = LayerMask.GetMask("monster");
+      isAlive = true;
       
       if (healthSlider == null)
       {
@@ -25,7 +27,10 @@ public class Commander : MonoBehaviour, IDamageable, IAttacker
 
    private void OnDeath()
    {
-      EventManager.Publish(GameEventType.CommanderDeath);
+      // 죽어있는 상태로 변경 -> 데미지를 입지않아 이 함수를 호출하지 않아야하며,
+      // 흐음
+      isAlive = false;
+      EventManager.Publish(GameEventType.GameEnd, false);
    }
 
    public bool TakeDamage(float damage, IAttacker attacker)
