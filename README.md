@@ -170,3 +170,4 @@
 - 이 프로젝트는 **과제 목적**으로 제작되었습니다.
 - 코드 구조, 매니저 설계, UI 구조(Atomic Design), 상태 머신 등은  
   이후 다른 프로젝트에서도 재사용/확장 가능하도록 설계하는 것을 목표로 합니다.
+- 영상 : https://drive.google.com/file/d/1HtRr18Nv06xjJirAxrKo4dvuDZVCZp84/view?usp=sharing
