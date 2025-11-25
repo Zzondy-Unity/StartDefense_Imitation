@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BaseSceneManager : MonoBehaviour, IManager
+public abstract class BaseSceneManager : Singleton<BaseSceneManager>, IManager
 {
     public abstract SceneName curScene { get;}
     public ObjectPoolManager objectPoolManager { get; protected set; }
