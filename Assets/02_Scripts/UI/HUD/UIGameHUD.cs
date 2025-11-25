@@ -12,9 +12,19 @@ public class UIGameHUD : UIBase
         if (middle == null) middle = GetComponentInChildren<HUD_MIDDLE>();
         if (bottom == null) bottom = GetComponentInChildren<HUD_BOTTOM>();
         
-        top.Init();
-        middle.Init();
-        bottom.Init();
+        top.Init(this);
+        middle.Init(this);
+        bottom.Init(this);
+    }
+
+    public void ShowBounty()
+    {
+        middle.ShowBountyUI();
+    }
+
+    public void HideBounty()
+    {   
+        middle.HideBountyUI();
     }
 
     public override void Opened(object[] param)

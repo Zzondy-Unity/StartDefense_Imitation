@@ -7,7 +7,7 @@ public class SceneController : MonoBehaviour, IManager
 {
     public SceneName priviousScene { get; private set; }
     public SceneName curScene { get; private set; }
-    
+
     public BaseSceneManager curSceneManager { get; private set; }
     
     private Coroutine loadingCoroutine;

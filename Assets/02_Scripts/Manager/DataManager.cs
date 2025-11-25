@@ -38,6 +38,7 @@ public class DataManager : IManager
         LoadPlayerData();
     }
 
+    #region <<<<<<<< 시트 파싱 >>>>>>>>
     private void HeroSheetParse()
     {
         var json = GameManager.Resource.LoadAsset<TextAsset>(jsonPath + heroFileName);
@@ -74,7 +75,7 @@ public class DataManager : IManager
         foreach (var monster in jsons)
         {
             monsterDataBase.Add(monster.monsterId, monster);
-            if (monster.monsterId / 100000 % 10 == 3)
+            if (monster.monsterId / 1000000 % 10 == 3)
             {
                 bountyList.Add(monster.monsterId);
             }
@@ -97,6 +98,11 @@ public class DataManager : IManager
         }
     }
     
+
+    #endregion
+
+    #region <<<<<<<< public함수 >>>>>>>>
+
     public MonsterData GetMonsterByID(int id)
     {
         var monster = monsterDataBase.TryGetValue(id, out MonsterData data) ? data : null;
@@ -155,6 +161,15 @@ public class DataManager : IManager
         return monsterWaves;
     }
 
+    public List<int> GetBountyMonster()
+    {
+        return bountyList;
+    }
+
+    #endregion
+
+    #region <<<<<<<< 저장 & 로드 >>>>>>>>
+
     public PlayerData GetPlayerData()
     {
         return playerData;
@@ -179,4 +194,8 @@ public class DataManager : IManager
         string json = File.ReadAllText(path);
         playerData = JsonUtility.FromJson<PlayerData>(json);
     }
+
+    #endregion
+
+    
 }

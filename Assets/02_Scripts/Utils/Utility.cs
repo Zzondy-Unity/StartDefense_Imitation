@@ -47,6 +47,9 @@ public static class Utility
             case UnitPopupMode.Transcend:
                 color = Color.yellow;
                 break;
+            case UnitPopupMode.FixTile:
+                color = Color.green;
+                break;
         }
 
         if (color == Color.white)

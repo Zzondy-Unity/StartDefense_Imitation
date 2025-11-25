@@ -12,6 +12,11 @@ public class GameSceneManager : BaseSceneManager
 
     public int RoundNumber {get {return Round;}}
     public int SummonCost { get; } = 20;
+    public int TileFixCost { get; private set; } = 20;
+    public bool canFixTile
+    {
+        get { return TileFixCost <= Stage.curMineral; }
+    }
 
     public TileManager Tile { get; private set; }
     public WaveManager Wave { get; private set; }
@@ -24,6 +29,7 @@ public class GameSceneManager : BaseSceneManager
     {
         base.Init();
         
+        Logger.Log($"[GameSceneManager Initialized!");
         if (tilemap == null)
         {
             if (GameObject.FindGameObjectWithTag("Tilemap").TryGetComponent<Tilemap>(out Tilemap tile))
@@ -47,6 +53,7 @@ public class GameSceneManager : BaseSceneManager
         {
             waypoints[i] = waypointTransforms[i].position;
         }
+        
         Tile = new TileManager(tilemap, waypoints, this);
         Wave = GetComponentInChildren<WaveManager>();
         Stage = GetComponentInChildren<StageManager>();
@@ -76,6 +83,13 @@ public class GameSceneManager : BaseSceneManager
         worldPos.z = 0;
         
         TileNode tileNode = Tile.GetTileNode(worldPos);
+        
+        // 타일 노드가 아닌 다른곳을 클릭했을 시
+        if (tileNode == null)
+        {
+            return;
+        }
+        
         Vector2 screen = mainCamera.WorldToScreenPoint(tileNode.worldPos);
         if (tileNode != null)
         {
@@ -86,6 +100,11 @@ public class GameSceneManager : BaseSceneManager
                 //     GameManager.UI.Hide<UISummon>();
                 // }
                 tileNode.Interact(screen);
+            }
+            else if (tileNode.tileType == TileType.FixTile)
+            {
+                var ui = GameManager.UI.Show<UIFixTile>(tileNode);
+                ui.transform.position = screen;
             }
             else
             {
@@ -103,9 +122,16 @@ public class GameSceneManager : BaseSceneManager
                 {
                     GameManager.UI.Hide<UITrescend>();
                 }
+
+                if (GameManager.UI.IsOpened<UIFixTile>() != null)
+                {
+                    GameManager.UI.Hide<UIFixTile>();
+                }
             }
         }
     }
+    
+    public Tilemap Tilemap => tilemap;
 
     private void OnGameEnd(object org)
     {
@@ -138,6 +164,7 @@ public class GameSceneManager : BaseSceneManager
         GameManager.Data.SavePlayerData();
         GameManager.Input.IsMouseLocked = true;
         
+        GameManager.Input.onClick -= OnMouseClick;
         EventManager.UnSubscribe(GameEventType.GameEnd, OnGameEnd);
         GameManager.UI.Hide<UIGameHUD>();
     }

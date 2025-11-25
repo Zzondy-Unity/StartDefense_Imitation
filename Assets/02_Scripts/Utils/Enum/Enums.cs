@@ -47,4 +47,5 @@ public enum UnitPopupMode
     Exchange,
     Transcend,
     Upgrade,
+    FixTile,
 }

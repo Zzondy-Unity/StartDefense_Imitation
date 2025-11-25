@@ -4,7 +4,21 @@ using UnityEngine;
 public class HealthSystem
 {
     public float maxHealth { get; private set; }
-    public float currentHealth { get; private set; }
+    private float curHP;
+
+    public float currentHealth
+    {
+        get
+        {
+            return curHP;
+        }
+        private set
+        {
+            curHP = Mathf.Clamp(value, 0, maxHealth);
+            healthSlider.value = curHP;
+        }
+    }
+
     atom_sliderTxt healthSlider;
 
     public event Action OnDeath;
@@ -16,7 +30,6 @@ public class HealthSystem
         this.maxHealth = maxHealth;
         
         healthSlider.maxValue = maxHealth;
-        healthSlider.value = currentHealth;
         
         Restore();
     }
@@ -28,11 +41,9 @@ public class HealthSystem
         // Logger.Log($"{attacker} attacke {damage}");
         
         currentHealth -= damage;
-        healthSlider.value = currentHealth;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            healthSlider.value = 0;
             Dead();
         }
         return true;

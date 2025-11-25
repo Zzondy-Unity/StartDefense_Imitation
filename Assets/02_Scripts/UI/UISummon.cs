@@ -25,7 +25,9 @@ public class UISummon : UIPopUp
     {
         if (gameSceneManager != null)
         {
-            gameSceneManager.Stage.SpawnHero(Grade.epic, curTile);
+            // test를 위한 고등급 몬스터 소환중
+            // gameSceneManager.Stage.SpawnHero(Grade.epic, curTile);
+            gameSceneManager.Stage.SpawnNormalHero(curTile);
         }
     }
 

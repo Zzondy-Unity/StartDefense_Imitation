@@ -1,20 +1,189 @@
 {"datas":[
   {
     "monsterId": 21000001,
+    "monsterName": "zergling",
     "maxHealth": 10,
     "moveSpeed": 1.0,
-    "resourceKey": "Monster/Prefab/normalMonster_01"
+    "resourceKey": "Monster/Prefab/normalMonster_01",
+    "rewardGold": 10,
+    "rewardMineral": 0,
+    "monsterDesc": "afsdfag",
+    "spriteKey": "Image/legendary_01"
   },
   {
     "monsterId": 21000002,
+    "monsterName": "hydra",
     "maxHealth": 7,
     "moveSpeed": 1.5,
-    "resourceKey": "Monster/Prefab/normalMonster_02"
+    "resourceKey": "Monster/Prefab/normalMonster_02",
+    "rewardGold": 10,
+    "rewardMineral": 0,
+    "monsterDesc": "afgs",
+    "spriteKey": "Image/legendary_01"
   },
   {
     "monsterId": 22000001,
+    "monsterName": "ultra",
     "maxHealth": 30,
     "moveSpeed": 2.0,
-    "resourceKey": "Monster/Prefab/rareMonster_01"
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 10,
+    "rewardMineral": 30,
+    "monsterDesc": "gasrgv",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000001,
+    "monsterName": "zym",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 40,
+    "rewardMineral": 0,
+    "monsterDesc": "esbt",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000002,
+    "monsterName": "zeratul",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 20,
+    "rewardMineral": 0,
+    "monsterDesc": "aneyruy",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000003,
+    "monsterName": "b_a",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 40,
+    "rewardMineral": 0,
+    "monsterDesc": "artm,dmf",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000004,
+    "monsterName": "b_b",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 50,
+    "rewardMineral": 0,
+    "monsterDesc": "aetryjtu",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000005,
+    "monsterName": "b_c",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 60,
+    "rewardMineral": 0,
+    "monsterDesc": "iyftuyutdgf",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000006,
+    "monsterName": "b_d",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 70,
+    "rewardMineral": 0,
+    "monsterDesc": "uktyjhj",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000007,
+    "monsterName": "b_e",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 80,
+    "rewardMineral": 0,
+    "monsterDesc": "ttrytkuyflkj",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000008,
+    "monsterName": "b_f",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 90,
+    "rewardMineral": 0,
+    "monsterDesc": "utkdjyh",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000009,
+    "monsterName": "b_g",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 0,
+    "rewardMineral": 50,
+    "monsterDesc": "dtkduyljh",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000010,
+    "monsterName": "b_h",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 0,
+    "rewardMineral": 60,
+    "monsterDesc": "yeartoypoi",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000011,
+    "monsterName": "b_i",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 0,
+    "rewardMineral": 70,
+    "monsterDesc": "eqwtio",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000012,
+    "monsterName": "b_j",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 0,
+    "rewardMineral": 80,
+    "monsterDesc": "gfzdhfh",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000013,
+    "monsterName": "b_k",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 0,
+    "rewardMineral": 90,
+    "monsterDesc": "fhjyrth",
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "monsterId": 23000014,
+    "monsterName": "b_l",
+    "maxHealth": 30,
+    "moveSpeed": 2.0,
+    "resourceKey": "Monster/Prefab/rareMonster_01",
+    "rewardGold": 0,
+    "rewardMineral": 100,
+    "monsterDesc": "zfyrs",
+    "spriteKey": "Image/legendary_01"
   }
 ]}

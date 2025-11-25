@@ -10,10 +10,11 @@ public class HUD_TOP : MonoBehaviour
     [SerializeField] private Button statistics;
     [SerializeField] private atom_Supply supply;
 
+    private UIGameHUD hud;
 
-    public void Init()
+    public void Init(UIGameHUD hud)
     {
-        
+        this.hud = hud;
     }
 
     public void Refresh()

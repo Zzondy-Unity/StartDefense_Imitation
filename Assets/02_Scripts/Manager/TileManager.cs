@@ -8,8 +8,8 @@ public class TileManager
     
     private Tilemap tilemap;
     private Dictionary<Vector3Int, TileNode> tiles = new Dictionary<Vector3Int, TileNode>();
+    private Dictionary<TileType, TypedTile> tileTypes = new Dictionary<TileType, TypedTile>();
     private TileNode monsterSpawnTile;
-    private TileNode monsterGoalTile;
     private Vector3[] monsterPath;
     
     public TileManager(Tilemap tilemap, Vector3[] waypoints, GameSceneManager manager)
@@ -32,7 +32,6 @@ public class TileManager
     {
         tiles.Clear();
         monsterSpawnTile = null;
-        monsterGoalTile = null;
 
         BoundsInt bounds = tilemap.cellBounds;
         for (int x = bounds.xMin; x < bounds.xMax; ++x)
@@ -45,6 +44,8 @@ public class TileManager
                 TileNode node = new TileNode();
                 node.cellPos = new Vector3Int(x, y, 0);
 
+                
+
                 if (baseTile == null)
                 {
                     node.tileType = TileType.Road;
@@ -52,13 +53,14 @@ public class TileManager
                 else if (baseTile is TypedTile typed)
                 {
                     node.tileType = typed.tileType;
-                    if (typed.tileType == TileType.Goal)
-                    {
-                        monsterGoalTile = node;
-                    }
-                    else if (typed.tileType == TileType.Spawn)
+                    if (typed.tileType == TileType.Spawn)
                     {
                         monsterSpawnTile = node;
+                    }
+                    
+                    if (!tileTypes.ContainsKey(node.tileType))
+                    {
+                        tileTypes.Add(node.tileType, typed);
                     }
                 }
 
@@ -72,6 +74,12 @@ public class TileManager
 
     public TileNode GetTileNode(Vector3 worldPos)
     {
+        if (tilemap == null)
+        {
+            var manager = GameManager.Scene.curSceneManager as GameSceneManager;
+            this.tilemap = manager.Tilemap;
+        }
+        
         Vector3Int cellPos = tilemap.WorldToCell(worldPos);
         if (tiles.TryGetValue(cellPos, out TileNode node))
         {
@@ -90,107 +98,12 @@ public class TileManager
         return monsterSpawnTile.worldPos;
     }
 
-    #region <<<<<<<< BFS를 이용한 최단거리 계산 >>>>>>>>
-    
-    // public Stack<Vector3> GetMonsterPath()
-    // {
-    //     if (monsterPath.Count == 0)
-    //     {
-    //         CalculateWayPoints();
-    //     }
-    //
-    //     return monsterPath;
-    // }
-    //
-    // private readonly Vector3Int[] neighborOffset =
-    // {
-    //     new Vector3Int(1, 0, 0),
-    //     new Vector3Int(-1, 0, 0),
-    //     new Vector3Int(0, 1, 0),
-    //     new Vector3Int(0, -1, 0),
-    // };
-    //
-    // private void CalculateWayPoints()
-    // {
-    //     // 길찾기 시작하기
-    //     monsterPath.Clear();
-    //
-    //     if (monsterSpawnTile == null || monsterGoalTile == null)
-    //     {
-    //         Logger.ErrorLog(
-    //             $"[TileManager] monsterSpawnTile : {monsterSpawnTile}\n monsterGoalTile : {monsterGoalTile}");
-    //         return;
-    //     }
-    //
-    //     Queue<TileNode> currentPath = new Queue<TileNode>();
-    //     HashSet<TileNode> visited = new HashSet<TileNode>();
-    //
-    //     currentPath.Enqueue(monsterSpawnTile);
-    //     visited.Add(monsterSpawnTile);
-    //
-    //     bool isFound = false;
-    //
-    //     while (currentPath.Count > 0)
-    //     {
-    //         var curNode = currentPath.Dequeue();
-    //         if (curNode.tileType == TileType.Goal)
-    //         {
-    //             isFound = true;
-    //             break;
-    //         }
-    //
-    //         foreach (var neighbor in GetNeighbors(curNode))
-    //         {
-    //             if (visited.Contains(neighbor))
-    //             {
-    //                 continue;
-    //             }
-    //
-    //             visited.Add(neighbor);
-    //             currentPath.Enqueue(neighbor);
-    //             neighbor.parent = curNode;
-    //         }
-    //     }
-    //
-    //     if (!isFound)
-    //     {
-    //         Logger.ErrorLog($"[TileManager] 길을 찾을 수 없습니다.");
-    //         return;
-    //     }
-    //
-    //     Stack<Vector3> path = new Stack<Vector3>();
-    //     TileNode nodePtr = monsterGoalTile;
-    //
-    //     while (nodePtr != null)
-    //     {
-    //         path.Push(nodePtr.worldPos);
-    //         nodePtr = nodePtr.parent;
-    //     }
-    //
-    //     monsterPath = path;
-    // }
-    //
-    // private IEnumerable<TileNode> GetNeighbors(TileNode cur)
-    // {
-    //     foreach (var offset in neighborOffset)
-    //     {
-    //         var neighborPos = cur.cellPos + offset;
-    //         if (tiles.TryGetValue(neighborPos, out TileNode neighbor))
-    //         {
-    //             if (IsWalkable(neighbor))
-    //             {
-    //                 yield return neighbor;
-    //             }
-    //         }
-    //     }
-    // }
-    //
-    // private bool IsWalkable(TileNode neighbor)
-    // {
-    //     return neighbor.tileType == TileType.Road
-    //            || neighbor.tileType == TileType.Spawn
-    //            || neighbor.tileType == TileType.Goal;
-    // }
-
-    #endregion
+    public void ChangeTile(TileNode curTile, TileType type)
+    {
+        if (tiles.TryGetValue(curTile.cellPos, out TileNode node))
+        {
+            tiles[curTile.cellPos].tileType = type;
+            tilemap.SetTile(curTile.cellPos, tileTypes[type]);
+        }
+    }
 }

@@ -1,22 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class HUD_MIDDLE : MonoBehaviour
 {
-    [SerializeField] private Transform leftNexus;
-    [SerializeField] private Transform rightNexus;
-    [SerializeField] private Transform leftMineral;
-    [SerializeField] private Transform rightMineral;
-    [SerializeField] private Probe probePrefab;
+    [SerializeField] private UIBounty uiBounty;
+    private UIGameHUD _hud;
 
-    public void Init()
+    public void Init(UIGameHUD hud)
     {
-        
+        _hud = hud;
+        uiBounty.Init();
     }
 
     public void Refresh()
     {
-        
+        uiBounty.Refresh();
+    }
+
+    public void ShowBountyUI()
+    {
+        uiBounty.Show();
+    }
+    
+    public void HideBountyUI()
+    {
+        uiBounty.Hide();
     }
 }

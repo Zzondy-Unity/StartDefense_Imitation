@@ -22,6 +22,11 @@ public class UIPopUp : UIBase
         {
             GameManager.UI.Hide<UITrescend>();
         }
+
+        if (GameManager.UI.IsOpened<UIFixTile>() != null)
+        {
+            GameManager.UI.Hide<UIFixTile>();
+        }
     }
 
     protected void Hide<T>() where T : UIPopUp

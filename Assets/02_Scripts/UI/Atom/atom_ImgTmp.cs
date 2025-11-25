@@ -21,9 +21,15 @@ public class atom_ImgTmp : MonoBehaviour
         set { _text.color = value; }
     }
 
-    public void Set(Image image, TextMeshProUGUI text)
+    public void Set(Image image, string text)
     {
         this._image = image;
-        this._text = text;
+        this._text.text = text;
+    }
+
+    public void Set(Sprite sprite, string text)
+    {
+        this._image.sprite = sprite;
+        this._text.text = text;
     }
 }

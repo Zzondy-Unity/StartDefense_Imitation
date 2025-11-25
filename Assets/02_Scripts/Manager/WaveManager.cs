@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 몬스터 관련된 것들을 관리합니다.
+/// </summary>
 public class WaveManager : MonoBehaviour
 {
     private GameSceneManager manager;
@@ -11,6 +14,7 @@ public class WaveManager : MonoBehaviour
     public int curWaveNumber { get; private set; }
     public int maxWaveNumber { get; private set; }
 
+    // 몬스터 정보를 담아두고있는 리스트의 카운트로 변경
     public int curMonsterNumber
     {
         get { return monsterNum; }
@@ -22,7 +26,6 @@ public class WaveManager : MonoBehaviour
     }
 
     private int curRound;
-    private bool waifForNextWave = false;
     private int monsterNum = 0;
 
     private Coroutine timeCoroutine;
@@ -30,7 +33,6 @@ public class WaveManager : MonoBehaviour
 
     private readonly float maxWaitForNexWaveTime = 10f;
     private readonly float spawnInterval = 0.5f;
-    private float curWaitForNexWaveTime = 0f;
 
     private Dictionary<int, MonsterWaveData> curWaveDatas = new();
 
@@ -63,7 +65,6 @@ public class WaveManager : MonoBehaviour
 
     public void OnGameEnd(bool isWin)
     {
-        Logger.Log($"GameEndCalled");
         if (waveLoop != null)
         {
             StopCoroutine(waveLoop);
@@ -109,30 +110,33 @@ public class WaveManager : MonoBehaviour
             int monsterNum = curWaveDatas[curWaveNumber].totalSpawn;
             for (int i = 0; i < monsterNum; i++)
             {
-                // monsterSpawn by id
-                MonsterData monsterData = GameManager.Data.GetMonsterByID(monsterId);
-                Monster monsterAsset = GameManager.Resource.LoadAsset<Monster>(monsterData.resourceKey);
-                var monster = GameManager.Pool.GetFromPool(monsterAsset);
-                monster.Init(monsterData);
-                monster.transform.position = manager.Tile.GetSpawnPosition();
-                curMonsterNumber++;
+                SpawnMonster(monsterId);
 
                 // TODO :: WaitForSeconds 미리 캐싱해둘것 (너무 자주 사용)
                 yield return new WaitForSeconds(spawnInterval);
             }
-
+            
             curWaveNumber++;
             yield return new WaitForSeconds(maxWaitForNexWaveTime);
         }
-
-        curWaveNumber = maxWaveNumber;
+        
         waveLoop = null;
+    }
+
+    public void SpawnMonster(int id)
+    {
+        MonsterData monsterData = GameManager.Data.GetMonsterByID(id);
+        Monster monsterAsset = GameManager.Resource.LoadAsset<Monster>(monsterData.resourceKey);
+        var monster = GameManager.Pool.GetFromPool(monsterAsset);
+        monster.Init(monsterData);
+        monster.transform.position = manager.Tile.GetSpawnPosition();
+        curMonsterNumber++;
     }
 
     private void OnMonsterDie(object org)
     {
         curMonsterNumber--;
-        if (curMonsterNumber <= 0 && curWaveNumber == maxWaveNumber)
+        if (curMonsterNumber <= 0 && curWaveNumber > maxWaveNumber)
         {
             EventManager.Publish(GameEventType.GameEnd, true);
         }

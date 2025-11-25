@@ -7,7 +7,7 @@ public class PlayerData
     public int curRound;
     public int startMineral = 10;
     public int startGold = 30;
-    public int startProbe;
+    public int startProbe = 5;
 
     public int[] ownedTrescend = new[]
     {
