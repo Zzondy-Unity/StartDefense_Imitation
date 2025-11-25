@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class GameSceneManager : BaseSceneManager
@@ -66,7 +65,6 @@ public class GameSceneManager : BaseSceneManager
     
     private void OnMouseClick(Vector2 screenPos)
     {
-        // world position으로 변경
         if (Tile == null) return;
         if (mainCamera == null)
         {
@@ -74,7 +72,7 @@ public class GameSceneManager : BaseSceneManager
         }
 
         // ui가 띄어져있으면 ui우선
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        if (Utility.IsPointerOverUI(screenPos))
         {
             return;
         }
@@ -93,7 +91,8 @@ public class GameSceneManager : BaseSceneManager
         Vector2 screen = mainCamera.WorldToScreenPoint(tileNode.worldPos);
         if (tileNode != null)
         {
-            if (tileNode.tileType == TileType.Normal)
+            if (tileNode.tileType == TileType.Normal
+                || tileNode.tileType == TileType.Buffed)
             {
                 // if (GameManager.UI.IsOpened<UISummon>())
                 // {

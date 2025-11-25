@@ -1,32 +1,21 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(HeroAttackController))]
 public class Hero : MonoBehaviour , IPoolable, IAttacker
 {
+    [SerializeField] private Image canUpImage;
+    [SerializeField] private Image gradeRing;
+    
     public HeroData data { get; private set; }
     public int id { get; private set; }
     public Grade heroGrade { get; private set; }
     public TileNode tile { get; private set; }
-
-    private HeroAttackController attackController;
     
-    [SerializeField] private Image canUpImage;
-    [SerializeField] private Image gradeRing;
-
-    public bool CanUpgrade
-    {
-        get
-        {
-            var manager = GameManager.Scene.curSceneManager as GameSceneManager;
-            return manager.Stage.CanUpgrade(data.heroId);
-        }
-        set
-        {
-            ShowUpgrade(value);
-        }
-    }
-
+    private HeroAttackController attackController;
+    private Tween shakeTween;
+    
     public virtual void Init(HeroData _data, TileNode _tile)
     {
         data = _data;
@@ -36,19 +25,26 @@ public class Hero : MonoBehaviour , IPoolable, IAttacker
 
         if (TryGetComponent<HeroAttackController>(out var controller))
         {
+            bool isBuffed = _tile.tileType == TileType.Buffed;
             attackController = controller;
-            attackController.Init(data, this);
+            attackController.Init(data, this, isBuffed);
+            if (isBuffed)
+            {
+                shakeTween = transform.DOShakeScale(1.5f, 1f).SetLoops(-1);
+            }
         }
         
         canUpImage.gameObject.SetActive(false);
         gradeRing.color = Utility.GetColorByGrade(heroGrade);
     }
 
-    public virtual void ShowUpgrade(bool canUpgrade)
+    public void Enhance()
     {
-        canUpImage.gameObject.SetActive(canUpgrade);
+        attackController.Enhance();
+        transform.DOScaleX(5, 1)
+            .OnComplete(() => transform.DOScaleX(1, 1));
     }
-
+    
     public Component poolKey { get; set; }
     public virtual void OnSpawnFromPool()
     {
@@ -57,6 +53,10 @@ public class Hero : MonoBehaviour , IPoolable, IAttacker
 
     public virtual void OnReturnToPool()
     {
+        if (shakeTween != null)
+        {
+            shakeTween.Kill();
+        }
         tile.curHero = null;
         attackController.OnDead();
     }

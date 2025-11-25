@@ -10,7 +10,6 @@ public class HeroSO : ScriptableObject
 	public float attack;
 	public float attackRange;
 	public string resourceKey;
-	public int combinationHero;
 	public string bulletKey;
 	public int[] transcendList;
 	public string spriteKey;

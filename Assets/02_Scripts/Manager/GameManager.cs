@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class GameManager : SingletonDontDestroy<GameManager>
 {
+    #region << =========== 인스턴스 =========== >>
+
     private SceneController _sceneController;
 
     private ResourceManager _resourceManager;
@@ -47,6 +49,9 @@ public class GameManager : SingletonDontDestroy<GameManager>
     {
         get { return Instance._inputManager; }
     }
+
+    #endregion
+   
 
     protected override void Awake()
     {

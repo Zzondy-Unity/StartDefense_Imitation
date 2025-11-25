@@ -23,6 +23,8 @@ public class StageManager : MonoBehaviour, IManager
     private List<Probe> probeList = new List<Probe>();
     private bool isLeft = true;
     private bool doInit = true;
+    public int normalEnhanceCost { get; private set; } = 20;
+    public int hightEnhanceCost { get; private set; } = 50;
 
     public bool canSummon
     {
@@ -82,6 +84,7 @@ public class StageManager : MonoBehaviour, IManager
         if (org is int amount)
         {
             curMineral += amount;
+            GameManager.UI.Refresh<UIFixTile>();
             GameManager.UI.Refresh<UIGameHUD>();
         }
     }
@@ -128,7 +131,11 @@ public class StageManager : MonoBehaviour, IManager
         
         // 해당영웅 2마리 제거
         int id = tileNode.curHero.id;
-        int upgradeId = tileNode.curHero.data.combinationHero;
+        int grade = (int)tileNode.curHero.heroGrade;
+        grade++;
+        Grade next = (Grade)grade;
+        int upgradeId = GameManager.Data.GetHeroByGradeRandom(next);
+        
         RemoveHero(tileNode.curHero);
         RemoveHero(id);
         // 새로운 다음 등급 영웅 해당 타일에 소환
@@ -238,4 +245,20 @@ public class StageManager : MonoBehaviour, IManager
     }
 
     #endregion
+
+    public void Enhance(Grade grade)
+    {
+        var list = GameManager.Data.GetHerosByGrade(grade);
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (spawnedHeros.TryGetValue(list[i].heroId, out var heros))
+            {
+                foreach (var hero in heros)
+                {
+                    hero.Enhance();
+                }
+            }
+        }
+        
+    }
 }

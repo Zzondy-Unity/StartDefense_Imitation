@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class UIBounty : MonoBehaviour
+public class Mole_Bounty : MonoBehaviour
 {
     [SerializeField] private ScrollRect bountyScrollRect;
     [SerializeField] private cell_bounty cellBounty;

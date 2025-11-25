@@ -9,6 +9,7 @@ public class HUD_BOTTOM : MonoBehaviour
     [SerializeField] private atom_ImgTmp mineral;
     [SerializeField] private Button bountyBtn;
     [SerializeField] private Button probeBtn;
+    [SerializeField] private Button EnhanceBtn;
 
     private UIGameHUD _hud;
     
@@ -21,11 +22,18 @@ public class HUD_BOTTOM : MonoBehaviour
         
         bountyBtn.onClick.RemoveAllListeners();
         probeBtn.onClick.RemoveAllListeners();
+        EnhanceBtn.onClick.RemoveAllListeners();
         
         bountyBtn.onClick.AddListener(OnBountyBtn);
         probeBtn.onClick.AddListener(OnProbeBtn);
+        EnhanceBtn.onClick.AddListener(OnEnhanceBtn);
 
         Refresh();
+    }
+
+    private void OnEnhanceBtn()
+    {
+        _hud.ShowEnhance();
     }
 
     private void OnProbeBtn()

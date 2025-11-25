@@ -1,5 +1,4 @@
-﻿using UnityEditor.Animations;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MonsterMoveState : MonsterState
 {
@@ -22,7 +21,7 @@ public class MonsterMoveState : MonsterState
         curSpeed = originalSpeed;
 
         var manager = GameManager.Scene.curSceneManager as GameSceneManager;
-        waypoints = manager.Tile.GetMonsterPath();
+        waypoints = manager?.Tile.GetMonsterPath();
         
         curWaypointIdx = 0;
     }

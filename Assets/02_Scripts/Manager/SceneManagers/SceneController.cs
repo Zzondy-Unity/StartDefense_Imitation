@@ -68,4 +68,9 @@ public class SceneController : MonoBehaviour, IManager
         Logger.Log($"[SceneController] Entering scene. Scene:{curScene}, curSceneManager:{curSceneManager}");
         curSceneManager?.OnEnter();
     }
+
+    public T GetSceneManager<T>() where T : BaseSceneManager
+    {
+        return (T)curSceneManager;
+    }
 }

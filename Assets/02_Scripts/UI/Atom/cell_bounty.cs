@@ -26,4 +26,9 @@ public class cell_bounty : MonoBehaviour
       btn.onClick.AddListener(() => onClick?.Invoke(curBounty));
       this.curBounty = curBounty;
    }
+
+   public void SetActive(bool active)
+   {
+      btn.interactable = active;
+   }
 }

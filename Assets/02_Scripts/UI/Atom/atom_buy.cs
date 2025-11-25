@@ -27,6 +27,21 @@ public class atom_buy : UIPopUp
         costIT.text = cost.ToString();
     }
 
+    public void SetAtom(MoneyType moneyType, int cost, Action onClick,Action afterClick)
+    {
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() =>
+            {
+                onClick?.Invoke();
+                afterClick?.Invoke();
+            }
+        );
+        
+        Sprite moneySprite = Utility.GetMoneyImage(moneyType);
+        costIT.image.sprite = moneySprite;
+        costIT.text = cost.ToString();
+    }
+
     public void Refresh(bool canBuy)
     {
         costIT.textColor = canBuy ? Color.green : Color.red;

@@ -42,4 +42,14 @@ public class UIGameHUD : UIBase
         middle.Refresh();
         bottom.Refresh();
     }
+
+    public void ShowEnhance()
+    {
+        middle.ShowEnhanceUI();
+    }
+
+    public void HideEnhance()
+    {
+        
+    }
 }

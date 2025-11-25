@@ -32,8 +32,6 @@ public class Monster : MonoBehaviour, IDamageable, IPoolable, IAttacker
             {
                 monsterController = gameObject.AddComponent<MonsterController>();
             }
-
-            
         }
         else
         {

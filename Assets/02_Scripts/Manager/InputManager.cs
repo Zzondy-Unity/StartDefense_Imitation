@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour, IManager
@@ -21,7 +22,6 @@ public class InputManager : MonoBehaviour, IManager
         }
     }
     
-
     public void Init()
     {
         actionMap = new PlayerInputActionMap();
@@ -41,8 +41,7 @@ public class InputManager : MonoBehaviour, IManager
             onClick?.Invoke(mousePos);
         }
     }
-
-
+    
     public Vector2 GetMousePosition()
     {
         if (isMouseLocked) return Vector2.zero;

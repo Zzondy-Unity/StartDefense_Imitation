@@ -6,7 +6,6 @@
     "attack": 2.0,
     "attackRange": 3.0,
     "resourceKey": "Hero/Prefab/common_01",
-    "combinationHero": 12000001,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0
@@ -20,7 +19,6 @@
     "attack": 4.0,
     "attackRange": 3.0,
     "resourceKey": "Hero/Prefab/common_02",
-    "combinationHero": 13000002,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0
@@ -34,7 +32,19 @@
     "attack": 2.0,
     "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/normal_01",
-    "combinationHero": 13000001,
+    "bulletKey": "Hero/Projectiles/Bullet",
+    "transcendList": [
+      0
+    ],
+    "spriteKey": "Image/legendary_01"
+  },
+  {
+    "heroId": 12000002,
+    "heroName": "c",
+    "attackRate": 1.0,
+    "attack": 2.0,
+    "attackRange": 4.0,
+    "resourceKey": "Hero/Prefab/normal_02",
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0
@@ -48,7 +58,6 @@
     "attack": 2.0,
     "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/rare_01",
-    "combinationHero": 14000001,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0
@@ -62,7 +71,6 @@
     "attack": 3.0,
     "attackRange": 4.0,
     "resourceKey": "Hero/Prefab/rare_02",
-    "combinationHero": 14000001,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0
@@ -76,7 +84,6 @@
     "attack": 5.0,
     "attackRange": 5.0,
     "resourceKey": "Hero/Prefab/epic_01",
-    "combinationHero": 0,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       15000001,
@@ -93,7 +100,6 @@
     "attack": 10.0,
     "attackRange": 6.0,
     "resourceKey": "Hero/Prefab/legendary_01",
-    "combinationHero": 0,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0
@@ -107,7 +113,6 @@
     "attack": 10.0,
     "attackRange": 6.0,
     "resourceKey": "Hero/Prefab/legendary_01",
-    "combinationHero": 0,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0
@@ -121,7 +126,6 @@
     "attack": 10.0,
     "attackRange": 6.0,
     "resourceKey": "Hero/Prefab/legendary_01",
-    "combinationHero": 0,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0
@@ -135,7 +139,6 @@
     "attack": 10.0,
     "attackRange": 6.0,
     "resourceKey": "Hero/Prefab/legendary_01",
-    "combinationHero": 0,
     "bulletKey": "Hero/Projectiles/Bullet",
     "transcendList": [
       0

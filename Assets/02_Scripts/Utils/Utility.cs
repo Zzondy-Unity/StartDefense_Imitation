@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class Utility
 {
@@ -89,5 +91,20 @@ public static class Utility
     public static bool Contains(this LayerMask layerMask, int layer)
     {
         return (layerMask.value & (1 << layer)) != 0;
+    }
+
+    public static bool IsPointerOverUI(Vector2 screenPosition)
+    {
+        if (EventSystem.current == null)
+        {
+            return false;
+        }
+        
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = screenPosition;
+        
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count > 0;
     }
 }

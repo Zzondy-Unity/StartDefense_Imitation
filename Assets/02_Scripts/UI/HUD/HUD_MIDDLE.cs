@@ -1,29 +1,46 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class HUD_MIDDLE : MonoBehaviour
 {
-    [SerializeField] private UIBounty uiBounty;
+    [FormerlySerializedAs("uiBounty")] [SerializeField] private Mole_Bounty moleBounty;
+    [SerializeField] private Mole_Enhance moleEnhance;
     private UIGameHUD _hud;
 
     public void Init(UIGameHUD hud)
     {
         _hud = hud;
-        uiBounty.Init();
+        moleBounty.Init();
+        moleEnhance.Init();
+        
+        HideBountyUI();
+        HideEnhanceUI();
     }
 
     public void Refresh()
     {
-        uiBounty.Refresh();
+        moleBounty.Refresh();
+        moleEnhance.Refresh();
     }
 
     public void ShowBountyUI()
     {
-        uiBounty.Show();
+        moleBounty.Show();
     }
     
     public void HideBountyUI()
     {
-        uiBounty.Hide();
+        moleBounty.Hide();
+    }
+
+    public void ShowEnhanceUI()
+    {
+        moleEnhance.Show();
+    }
+
+    public void HideEnhanceUI()
+    {
+        moleEnhance.Hide();
     }
 }

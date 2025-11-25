@@ -27,8 +27,6 @@ public class Commander : MonoBehaviour, IDamageable, IAttacker
 
    private void OnDeath()
    {
-      // 죽어있는 상태로 변경 -> 데미지를 입지않아 이 함수를 호출하지 않아야하며,
-      // 흐음
       isAlive = false;
       EventManager.Publish(GameEventType.GameEnd, false);
    }
@@ -38,6 +36,7 @@ public class Commander : MonoBehaviour, IDamageable, IAttacker
       return healthSystem.TakeDamage(damage, attacker);
    }
 
+   // 현재 중복되어있기 때문에 변경가능성 높
    private void OnTriggerEnter2D(Collider2D other)
    {
       if (monsterLayerMask.Contains(other.gameObject.layer))

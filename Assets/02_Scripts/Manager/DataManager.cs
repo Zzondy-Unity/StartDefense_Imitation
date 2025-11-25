@@ -149,6 +149,18 @@ public class DataManager : IManager
         return heros;
     }
 
+    public int GetHeroByGradeRandom(Grade grade)
+    {
+        List<int> heroIds = gradeHeroData.TryGetValue(grade, out List<int> list) ? list : null;
+        if (heroIds == null)
+        {
+            return 0;
+        }
+        
+        int id = list[Random.Range(0, list.Count)];
+        return id;
+    }
+
     public List<MonsterWaveData> GetWaveDataByRound(int round)
     {
         List<MonsterWaveData> monsterWaves = waveDataBase.TryGetValue(round, out List<MonsterWaveData> list) ? list : null;

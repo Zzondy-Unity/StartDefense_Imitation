@@ -27,7 +27,7 @@ public class HeroAttackController : MonoBehaviour
 
     private IAttacker attacker;
 
-    public void Init(HeroData data, IAttacker attacker)
+    public void Init(HeroData data, IAttacker attacker, bool isBuffed)
     {
         EventManager.UnSubscribe(GameEventType.MonsterDeath, OnMonsterDead);
         EventManager.Subscribe(GameEventType.MonsterDeath, OnMonsterDead);
@@ -36,6 +36,12 @@ public class HeroAttackController : MonoBehaviour
         attackSpeed = data.attackRate;
         attack = data.attack;
         attackRange = data.attackRange;
+
+        // 타일버프시 10퍼센트의 공속버프를 받게
+        if (isBuffed)
+        {
+            attackSpeed += attackSpeed * 0.1f;
+        }
         
         attackCollider = GetComponent<CircleCollider2D>();
         attackCollider.radius = attackRange;
@@ -43,6 +49,12 @@ public class HeroAttackController : MonoBehaviour
         
         monsterLayer = LayerMask.GetMask("monster");
         bulletPrefab = GameManager.Resource.LoadAsset<Projectile>(data.bulletKey);
+    }
+
+    public void Enhance()
+    {
+        attackSpeed += attackSpeed * 0.1f;
+        attack += attack * 0.1f;
     }
 
     public void OnDead()

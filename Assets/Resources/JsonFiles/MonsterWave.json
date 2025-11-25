@@ -16,5 +16,35 @@
     "waveIndex": 3,
     "totalSpawn": 1,
     "spawnMonsterId": 22000001
+  },
+  {
+    "roundNum": 1,
+    "waveIndex": 4,
+    "totalSpawn": 10,
+    "spawnMonsterId": 21000001
+  },
+  {
+    "roundNum": 1,
+    "waveIndex": 5,
+    "totalSpawn": 10,
+    "spawnMonsterId": 21000002
+  },
+  {
+    "roundNum": 1,
+    "waveIndex": 6,
+    "totalSpawn": 10,
+    "spawnMonsterId": 21000001
+  },
+  {
+    "roundNum": 1,
+    "waveIndex": 7,
+    "totalSpawn": 10,
+    "spawnMonsterId": 21000002
+  },
+  {
+    "roundNum": 1,
+    "waveIndex": 8,
+    "totalSpawn": 1,
+    "spawnMonsterId": 22000001
   }
 ]}

@@ -43,9 +43,7 @@ public class TileManager
 
                 TileNode node = new TileNode();
                 node.cellPos = new Vector3Int(x, y, 0);
-
                 
-
                 if (baseTile == null)
                 {
                     node.tileType = TileType.Road;
@@ -77,7 +75,7 @@ public class TileManager
         if (tilemap == null)
         {
             var manager = GameManager.Scene.curSceneManager as GameSceneManager;
-            this.tilemap = manager.Tilemap;
+            this.tilemap = manager?.Tilemap;
         }
         
         Vector3Int cellPos = tilemap.WorldToCell(worldPos);

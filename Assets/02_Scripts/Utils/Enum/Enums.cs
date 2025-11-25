@@ -7,6 +7,7 @@ public enum TileType
     Normal,     // 영웅 스폰 가능 타일
     FixTile,    // 고칠 수 있는 
     Road,       // 지나갈 수 있는 빈 공간
+    Buffed,     // 버프타일
 }
 
 public enum BGM
